@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jan Lubatschowski — CV</title>
+<style>
+  :root {
+    --bg: #faf9f6;
+    --surface: #ffffff;
+    --surface-2: #f4f2ed;
+    --border: #e8e6e0;
+    --border-strong: #d4d1c8;
+    --text: #1a1a1a;
+    --text-muted: #6b6b6b;
+    --text-faint: #9a9a9a;
+    --accent: #c8553d;
+    --accent-soft: #f3d8d2;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-hover: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    font-size: 15px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    min-height: 100vh;
+    padding: 36px 24px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border-strong); }
+  a:hover { border-color: var(--text); }
+
+  /* Language switching */
+  html[lang="en"] [data-only-de] { display: none !important; }
+  html[lang="de"] [data-only-en] { display: none !important; }
+
+  /* Top bar */
+  .topbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .lang-toggle {
+    display: inline-flex;
+    border: 1px solid var(--border-strong);
+    border-radius: 20px;
+    overflow: hidden;
+    font-size: 12px;
+    background: var(--surface);
+  }
+  .lang-toggle button {
+    padding: 5px 14px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .lang-toggle button.active {
+    background: var(--text);
+    color: var(--surface);
+  }
+  .flag {
+    width: 18px;
+    height: 12px;
+    border-radius: 1px;
+    vertical-align: middle;
+    margin-right: 6px;
+    display: inline-block;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+  }
+  .lang-toggle button {
+    display: inline-flex;
+    align-items: center;
+  }
+
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: start;
+    margin-bottom: 14px;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+  .tagline {
+    color: var(--text);
+    font-size: 17px;
+    margin-bottom: 14px;
+    display: grid;
+  }
+  html .tagline span[data-only-en],
+  html .tagline span[data-only-de] {
+    grid-row: 1;
+    grid-column: 1;
+    display: block !important;
+    visibility: visible;
+  }
+  html[lang="en"] .tagline span[data-only-de],
+  html[lang="de"] .tagline span[data-only-en] {
+    visibility: hidden !important;
+  }
+  .contact {
+    color: var(--text-muted);
+    font-size: 13.5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    align-items: center;
+  }
+  .contact a { color: var(--text-muted); border-bottom-color: var(--border); }
+  .contact a:hover { color: var(--text); border-color: var(--text); }
+  .contact .sep { color: var(--text-faint); }
+  .photo {
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--surface);
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Actions */
+  .actions {
+    display: flex;
+    gap: 10px;
+    margin: 22px 0 36px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text);
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .btn:hover { border-color: var(--text); }
+  .btn-primary {
+    background: var(--text);
+    color: var(--surface);
+    border-color: var(--text);
+  }
+  .btn-primary:hover { opacity: 0.85; border-color: var(--text); }
+
+
+  .pdf-export .no-print { display: none !important; }
+  .pdf-export .actions { display: none !important; }
+
+  /* Section labels */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Profile */
+  .profile {
+    margin-bottom: 36px;
+    padding: 22px 26px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .profile p {
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.65;
+  }
+  html[lang="en"] .profile p[data-only-en] + p[data-only-en] { margin-top: 10px; }
+  html[lang="de"] .profile p[data-only-de] + p[data-only-de] { margin-top: 10px; }
+
+  /* Grid */
+  .cv-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  /* Sidebar */
+  .sidebar section { margin-bottom: 28px; }
+  .meta-list {
+    list-style: none;
+    font-size: 13.5px;
+  }
+  .meta-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+  }
+  .meta-list strong { font-weight: 600; }
+  .meta-list span { color: var(--text-muted); }
+  .prose-tags {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* Chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .chip {
+    padding: 3px 9px;
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
+    background: var(--surface);
+    font-size: 11.5px;
+    color: var(--text);
+  }
+  .chip.llm {
+    border-color: #c4b5fd;
+    color: #6d28d9;
+    background: #f5f3ff;
+  }
+
+  /* Main: Experience */
+  .main section { margin-bottom: 36px; }
+  .role {
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .role:last-child { border-bottom: none; padding-bottom: 0; }
+  .role-head { margin-bottom: 8px; }
+  .role-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .role-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .role-meta strong { color: var(--text); font-weight: 600; }
+  .role-desc {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.65;
+    margin-top: 8px;
+  }
+  .role-desc strong { font-weight: 600; }
+  .role-desc + .role-desc { margin-top: 8px; }
+  .role-sublabel {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-right: 6px;
+  }
+  .project-list {
+    list-style: none;
+    margin-top: 10px;
+  }
+  .project-list li {
+    font-size: 13.5px;
+    color: var(--text);
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+  .project-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 4px;
+    height: 4px;
+    background: var(--text-faint);
+    border-radius: 50%;
+  }
+  .project-list-cta {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* Early career compact */
+  .early-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .early-item {
+    font-size: 13px;
+    line-height: 1.55;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .early-item:last-child { border-bottom: none; }
+  .early-item strong { font-weight: 600; }
+  .early-item .muted { color: var(--text-muted); }
+
+  /* Education */
+  .edu-item { margin-bottom: 14px; }
+  .edu-title { font-size: 14.5px; font-weight: 600; }
+  .edu-meta { font-size: 13px; color: var(--text-muted); }
+
+  /* Recognition */
+  .recognition-list {
+    list-style: none;
+    column-count: 2;
+    column-gap: 32px;
+  }
+  .recognition-list li {
+    font-size: 13px;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 6px;
+    color: var(--text);
+    break-inside: avoid;
+  }
+  .recognition-list li::before {
+    content: "★";
+    position: absolute;
+    left: 0;
+    color: var(--text-faint);
+    font-size: 10px;
+    top: 2px;
+  }
+
+  /* Footer */
+  .site-footer {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-faint);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .site-footer a { color: var(--text-muted); border-bottom-color: var(--border); }
+  .site-footer .heart { color: #c8553d; }
+  .anthropic-mark {
+    width: 11px;
+    height: 11px;
+    vertical-align: -1px;
+    margin-right: 3px;
+    display: inline-block;
+  }
+  .claude-link {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Mobile */
+  @media (max-width: 760px) {
+    body { padding: 24px 16px 60px; }
+    h1 { font-size: 32px; }
+    .hero { grid-template-columns: 1fr; }
+    .photo { width: 96px; height: 96px; order: -1; }
+    .cv-grid { grid-template-columns: 1fr; gap: 24px; }
+    .recognition-list { column-count: 1; }
+  }
+
+  /* Print — improved */
+  @media print {
+    @page {
+      margin: 14mm 14mm 14mm 14mm;
+      size: A4;
+    }
+    html, body {
+      background: white !important;
+      padding: 0;
+      max-width: 100%;
+      font-size: 9.5pt;
+      color: #000;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body { padding: 0; }
+    .no-print, .topbar, .actions, .site-footer { display: none !important; }
+    .hero {
+      margin-bottom: 6mm;
+      gap: 16mm;
+    }
+    .hero-eyebrow { display: none; }
+    h1 { font-size: 22pt; margin-bottom: 4pt; }
+    .tagline { font-size: 11pt; margin-bottom: 6pt; }
+    .contact { font-size: 8.5pt; gap: 2pt 10pt; }
+    .contact a { color: #000; }
+    .photo {
+      width: 80px;
+      height: 80px;
+      box-shadow: none;
+      border: 2px solid var(--border);
+    }
+    .profile {
+      background: white;
+      padding: 0 0 8pt 0;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      border-radius: 0;
+      margin-bottom: 8mm;
+    }
+    .profile p { font-size: 10pt; line-height: 1.5; }
+    .section-label {
+      font-size: 8.5pt;
+      margin-bottom: 6pt;
+      padding-bottom: 3pt;
+    }
+    .cv-grid { gap: 14mm; grid-template-columns: 60mm 1fr; }
+    .main section, .sidebar section { margin-bottom: 6mm; }
+    .role {
+      break-inside: avoid;
+      page-break-inside: avoid;
+      margin-bottom: 5mm;
+      padding-bottom: 4mm;
+    }
+    .role-title { font-size: 10.5pt; }
+    .role-meta { font-size: 8.5pt; }
+    .role-desc { font-size: 9pt; line-height: 1.5; margin-top: 4pt; }
+    .project-list li { font-size: 8.5pt; }
+    .project-list-cta { display: none; }
+    .recognition-list { column-count: 2; }
+    .recognition-list li { font-size: 8.5pt; margin-bottom: 3pt; }
+    .meta-list li { font-size: 8.5pt; }
+    .prose-tags { font-size: 8.5pt; line-height: 1.5; }
+    .chip {
+      font-size: 8pt;
+      padding: 2pt 6pt;
+      background: white !important;
+    }
+    .chip.llm {
+      background: #f5f3ff !important;
+      border-color: #c4b5fd !important;
+      color: #6d28d9 !important;
+    }
+    .early-item { font-size: 8.5pt; padding: 3pt 0; }
+    .edu-title { font-size: 10pt; }
+    .edu-meta { font-size: 8.5pt; }
+    a { border-bottom: none; color: inherit; }
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+</head>
+<body>
+
+<div class="topbar no-print">
+  <div class="lang-toggle" role="tablist">
+    <button id="lang-en" class="active" type="button"><svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><clipPath id="ujt"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#ujt)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>EN</button>
+    <button id="lang-de" type="button"><svg class="flag" viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="1" y="0" fill="#000"/><rect width="5" height="1" y="1" fill="#DD0000"/><rect width="5" height="1" y="2" fill="#FFCE00"/></svg>DE</button>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">
+      <span data-only-en>Curriculum Vitae</span>
+      <span data-only-de>Lebenslauf</span>
+    </div>
+    <h1>Jan Lubatschowski</h1>
+    <p class="tagline">
+      <span data-only-en>Data Scientist → Project Lead. Data, Analytics, AI.</span>
+      <span data-only-de>Data Scientist → Projektleiter. Data, Analytics, AI.</span>
+    </p>
+    <div class="contact">
+      <span data-only-en>Berlin, Germany</span>
+      <span data-only-de>Berlin, Deutschland</span>
+      <span class="sep">·</span>
+      <a href="mailto:JanLubatschowski@gmail.com">JanLubatschowski@gmail.com</a>
+      <span class="sep">·</span>
+      <span>+49 151 688 067 34</span>
+      <span class="sep">·</span>
+      <a href="https://linkedin.com/in/janlubatschowski" target="_blank" rel="noopener">linkedin.com/in/janlubatschowski</a>
+      <span class="sep">·</span>
+      <a href="https://github.com/qpo" target="_blank" rel="noopener">github.com/qpo</a>
+    </div>
+  </div>
+  <img class="photo" src="images/jan.jpg" alt="Jan Lubatschowski">
+</header>
+
+<nav class="actions no-print">
+  <a class="btn btn-primary" href="projects/index.html">
+    <span data-only-en>View project portfolio →</span>
+    <span data-only-de>Projektportfolio ansehen →</span>
+  </a>
+  <button class="btn" onclick="window.print()">
+    <span data-only-en>Export as PDF</span>
+    <span data-only-de>Als PDF exportieren</span>
+  </button>
+</nav>
+
+<section class="profile">
+  <p data-only-en>10+ years putting Data, Analytics and AI into production at <strong>McKinsey</strong>, <strong>QuantCo</strong> and other organizations. Comfortable in the boardroom and the codebase.</p>
+  <p data-only-en>Most recent work: a 12-month <strong>GenAI program at a top-3 Swiss insurer</strong>, bringing live their first specialized internal LLM solutions in Underwriting.</p>
+  <p data-only-en><strong>Entrepreneurial spirit</strong> — co-founded a FinTech start-up in 2014 with a €100k federal grant. Currently building a GenAI startup for family caregivers.</p>
+  <p data-only-de>10+ Jahre Erfahrung damit, Data, Analytics und AI bei <strong>McKinsey</strong>, <strong>QuantCo</strong> und weiteren Organisationen in Produktion zu bringen. Zu Hause sowohl im Boardroom als auch im Code.</p>
+  <p data-only-de>Aktuelle Arbeit: 12-monatiges <strong>GenAI-Programm bei einem Top-3-Schweizer Versicherer</strong> — Go-Live der ersten spezialisierten internen LLM-Lösungen im Underwriting.</p>
+  <p data-only-de><strong>Unternehmergeist</strong> — 2014 Mitgründer eines FinTech-Startups (100.000 € Bundesgründerstipendium). Aktuell im Aufbau: ein GenAI-Startup für pflegende Angehörige.</p>
+</section>
+
+<div class="cv-grid">
+  <aside class="sidebar">
+    <section>
+      <h2 class="section-label">
+        <span data-only-en>Languages</span>
+        <span data-only-de>Sprachen</span>
+      </h2>
+      <ul class="meta-list">
+        <li>
+          <strong><span data-only-en>German</span><span data-only-de>Deutsch</span></strong>
+          <span><span data-only-en>Native</span><span data-only-de>Muttersprache</span></span>
+        </li>
+        <li>
+          <strong><span data-only-en>English</span><span data-only-de>Englisch</span></strong>
+          <span><span data-only-en>Fluent</span><span data-only-de>Fließend</span></span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="section-label">
+        <span data-only-en>Industries</span>
+        <span data-only-de>Branchen</span>
+      </h2>
+      <div class="prose-tags" data-only-en>Insurance · Healthcare · Pharma · Energy · Automotive · Chemicals · Telco · Mining · Wholesale · Tech Startup · Public Sector</div>
+      <div class="prose-tags" data-only-de>Versicherung · Gesundheit · Pharma · Energie · Automobil · Chemie · Telekommunikation · Bergbau · Großhandel · Tech-Startup · Öffentlicher Sektor</div>
+    </section>
+
+    <section>
+      <h2 class="section-label">
+        <span data-only-en>Functional Skills</span>
+        <span data-only-de>Funktionale Skills</span>
+      </h2>
+      <div class="prose-tags" data-only-en>Descriptive / Predictive / Prescriptive Analytics · Machine Learning · Optimization · Project &amp; Stakeholder Management · Visualization · GenAI</div>
+      <div class="prose-tags" data-only-de>Deskriptive / Prädiktive / Präskriptive Analytik · Machine Learning · Optimierung · Projekt- &amp; Stakeholder-Management · Visualisierung · GenAI</div>
+    </section>
+
+    <section>
+      <h2 class="section-label">
+        <span data-only-en>Technical Skills</span>
+        <span data-only-de>Technische Skills</span>
+      </h2>
+      <div class="chips">
+        <span class="chip llm">Claude</span>
+        <span class="chip llm">OpenAI GPT-4</span>
+        <span class="chip llm">Gemini</span>
+        <span class="chip llm">LangChain</span>
+        <span class="chip llm">LangSmith</span>
+        <span class="chip">Python</span>
+        <span class="chip">R</span>
+        <span class="chip">SQL</span>
+        <span class="chip">Tableau</span>
+        <span class="chip">Alteryx</span>
+        <span class="chip">Domino Data Lab</span>
+        <span class="chip">Postgres</span>
+        <span class="chip">AWS</span>
+        <span class="chip">Azure</span>
+        <span class="chip">GCP</span>
+      </div>
+    </section>
+  </aside>
+
+  <main class="main">
+    <section>
+      <h2 class="section-label">
+        <span data-only-en>Experience</span>
+        <span data-only-de>Berufserfahrung</span>
+      </h2>
+
+      <article class="role">
+        <div class="role-head">
+          <div class="role-title">
+            <span data-only-en>Project Manager, Data &amp; AI</span>
+            <span data-only-de>Projektleiter, Data &amp; AI</span>
+          </div>
+          <div class="role-meta">
+            <span data-only-en>Since 03.2023</span><span data-only-de>Seit 03.2023</span>
+            · <strong>QuantCo</strong> ·
+            <span data-only-en>Germany</span><span data-only-de>Deutschland</span>
+          </div>
+        </div>
+        <p class="role-desc" data-only-en>Leading Data, AI and GenAI projects for German and Swiss enterprises on <strong>performance-based engagements</strong> — fees tied to measurable EBITDA impact at the client. Setting agenda and leading cross-functional teams (developers, data scientists, business) to <strong>build, integrate and ship GenAI/LLM use cases into production</strong> at a top-5 German insurer (€2.5M profit impact, ~20,000 cancellations prevented) and a top-3 Swiss insurer (CHF 1M p.a. impact, two production assistants in Underwriting). Owning the link between technical delivery and financial KPIs.</p>
+        <p class="role-desc" data-only-de>Leitung von Data-, AI- und GenAI-Projekten für deutsche und schweizerische Unternehmen in <strong>performance-basierten Engagements</strong> — Honorar an messbaren EBITDA-Impact beim Kunden gebunden. Agenda-Setting und Führung cross-funktionaler Teams (Entwicklung, Data Science, Business), die <strong>GenAI/LLM-Use-Cases in Produktion bringen</strong> — bei einem Top-5-Versicherer in Deutschland (€ 2,5 Mio. Profit-Impact, ~20.000 verhinderte Kündigungen) und einem Top-3-Schweizer Versicherer (CHF 1 Mio. p.a. Impact, zwei produktive Underwriting-Assistenten). Verantwortlich für die Verknüpfung technischer Lieferung mit finanziellen KPIs.</p>
+      </article>
+
+      <article class="role">
+        <div class="role-head">
+          <div class="role-title">
+            <span data-only-en>Contractor</span>
+            <span data-only-de>Freier Mitarbeiter</span>
+          </div>
+          <div class="role-meta">11.2022 – 01.2023 · <strong>Waterland Private Equity</strong> ·
+            <span data-only-en>Germany</span><span data-only-de>Deutschland</span>
+          </div>
+        </div>
+        <p class="role-desc" data-only-en>Embedded with a German mid-market portfolio company of Waterland PE. Created <strong>data transparency</strong>, improved the <strong>DWH</strong>, and shipped executive dashboards used by the leadership team.</p>
+        <p class="role-desc" data-only-de>Eingebettet bei einem deutschen Mid-Market-Portfoliounternehmen von Waterland PE. Schaffung von <strong>Datentransparenz</strong>, Verbesserung des <strong>DWH</strong> und Auslieferung von Executive-Dashboards, die vom Leadership-Team genutzt wurden.</p>
+      </article>
+
+      <article class="role">
+        <div class="role-head">
+          <div class="role-title">Account Executive &amp; Forward-Deployed Engineer</div>
+          <div class="role-meta">01.2022 – 11.2022 · <strong>DataRobot</strong>
+            <span data-only-en>(AI product scale-up)</span><span data-only-de>(AI-Product-Scale-up)</span>
+            ·
+            <span data-only-en>Germany</span><span data-only-de>Deutschland</span>
+          </div>
+        </div>
+        <p class="role-desc" data-only-en><span class="role-sublabel">Sales (post-promotion):</span> Owned enterprise accounts for DataRobot's AI cloud platform across DACH, driving <strong>seat-based platform growth</strong> and <strong>consumption-based usage expansion</strong> through deployed models. Led technical sales on <strong>build vs. buy</strong> decisions for AI infrastructure and platform <strong>due diligence</strong> for enterprise procurement.</p>
+        <p class="role-desc" data-only-en><span class="role-sublabel">Forward-Deployed (pre-sales):</span> Ran hands-on <strong>POC projects</strong> with prospect customers, building <strong>rapid prototypes</strong> to demonstrate platform capabilities. Worked side-by-side with customer data science teams to deliver <strong>measurable impact</strong> in 2–4 week sprints. Promoted into Sales after 3 months on the strength of combined technical fluency and client communication.</p>
+        <p class="role-desc" data-only-de><span class="role-sublabel">Sales (nach Beförderung):</span> Verantwortung für Enterprise-Accounts der DataRobot-AI-Cloud-Plattform in DACH. Treiber für <strong>seat-basiertes Plattformwachstum</strong> und <strong>nutzungsbasierte Expansion</strong> durch produktiv eingesetzte Modelle. Geführte technische Sales-Gespräche zu <strong>Build vs. Buy</strong>-Entscheidungen für AI-Infrastruktur und Plattform-<strong>Due-Diligence</strong> für Enterprise-Beschaffung.</p>
+        <p class="role-desc" data-only-de><span class="role-sublabel">Forward-Deployed (Pre-Sales):</span> Durchführung von <strong>POC-Projekten</strong> mit Prospect-Kunden, Bau von <strong>schnellen Prototypen</strong> zur Demonstration der Plattform-Fähigkeiten. Direkte Zusammenarbeit mit Data-Science-Teams der Kunden, um in 2–4-Wochen-Sprints <strong>messbaren Impact</strong> zu liefern. Nach 3 Monaten in den Sales-Track befördert auf Basis der Kombination aus technischer Tiefe und Kundenkommunikation.</p>
+      </article>
+
+      <article class="role">
+        <div class="role-head">
+          <div class="role-title">
+            <span data-only-en>Project Manager, Data Science</span>
+            <span data-only-de>Projektleiter, Data Science</span>
+          </div>
+          <div class="role-meta">02.2017 – 12.2021 · <strong>McKinsey &amp; Company</strong> ·
+            <span data-only-en>Germany</span><span data-only-de>Deutschland</span>
+          </div>
+        </div>
+        <p class="role-desc" data-only-en>5 years as project lead for <strong>AI &amp; Data Science engagements across many regulated DACH industries</strong>. Trusted advisor to C-level sponsors and end-to-end delivery: value-creation strategy, execution playbooks, hands-on prototyping (Python, R, Tableau), POCs and production-ready solutions. <em>Top 10% ranking in last 3 evaluation cycles, with a distinct rating in client communication and presentation skills.</em></p>
+        <p class="role-desc" data-only-de>5 Jahre als Projektleiter für <strong>AI- &amp; Data-Science-Engagements in vielen regulierten DACH-Branchen</strong>. Vertrauter Berater von C-Level-Sponsoren, End-to-End-Lieferung: Value-Creation-Strategie, Execution-Playbooks, Hands-on-Prototyping (Python, R, Tableau), POCs und produktive Lösungen. <em>Top-10%-Ranking in den letzten 3 Evaluationszyklen, mit ausgezeichneten Werten in Kundenkommunikation und Präsentation.</em></p>
+        <ul class="project-list" data-only-en>
+          <li><strong>Data &amp; AI value-creation strategies</strong> for German insurance and banking groups — vision, roadmap, use-case portfolio, target operating model, executive workshops</li>
+          <li>Led development of a novel <strong>AI for Finance</strong> product for Europe's largest pharma wholesaler, based on a complete DWH overhaul</li>
+          <li>Portfolio of <strong>AI use cases</strong> for a top 5 drug in Germany at a top 3 pharma company, leveraging internal and external (IQVIA) datasets</li>
+          <li><strong>30-dashboard</strong> Tableau buildout for end-to-end network visibility at a top 3 German utilities company</li>
+        </ul>
+        <ul class="project-list" data-only-de>
+          <li><strong>Data- &amp; AI-Wertschöpfungsstrategien</strong> für deutsche Versicherer und Banken — Vision, Roadmap, Use-Case-Portfolio, Target-Operating-Model, Executive-Workshops</li>
+          <li>Entwicklung eines neuartigen <strong>AI-for-Finance</strong>-Produkts für den größten Pharma-Großhändler Europas, basierend auf einem kompletten DWH-Umbau</li>
+          <li>Portfolio von <strong>AI-Use-Cases</strong> für ein Top-5-Medikament in Deutschland bei einem Top-3-Pharma-Konzern, unter Nutzung interner und externer (IQVIA) Datenquellen</li>
+          <li><strong>30-Dashboard</strong>-Tableau-Buildout für End-to-End-Netzwerk-Sichtbarkeit bei einem Top-3-deutschen Energieversorger</li>
+        </ul>
+        <p class="project-list-cta">
+          <span data-only-en>See <a href="projects/index.html">project portfolio →</a> for the full list.</span>
+          <span data-only-de>Vollständige Liste im <a href="projects/index.html">Projektportfolio →</a></span>
+        </p>
+      </article>
+
+      <article class="role">
+        <div class="role-head">
+          <div class="role-title">
+            <span data-only-en>Humanitarian Data Scientist Intern</span>
+            <span data-only-de>Praktikant, Humanitarian Data Science</span>
+          </div>
+          <div class="role-meta">06.2016 – 09.2016 · <strong>United Nations</strong> ·
+            <span data-only-en>Geneva, Switzerland</span><span data-only-de>Genf, Schweiz</span>
+          </div>
+        </div>
+        <p class="role-desc" data-only-en>Built a Python <strong>ML model</strong> predicting African migration flows from census and conflict-outbreak data, in cooperation with NGOs Flowminder and WorldPop.</p>
+        <p class="role-desc" data-only-de>Entwicklung eines Python-<strong>ML-Modells</strong> zur Vorhersage afrikanischer Migrationsströme aus Zensus- und Konfliktdaten, in Kooperation mit den NGOs Flowminder und WorldPop.</p>
+      </article>
+
+      <article class="role">
+        <div class="role-head">
+          <div class="role-title">
+            <span data-only-en>Co-Founder, Head of Marketing &amp; Sales</span>
+            <span data-only-de>Mitgründer, Head of Marketing &amp; Sales</span>
+          </div>
+          <div class="role-meta">09.2013 – 11.2014 · <strong>Contelligence</strong> ·
+            <span data-only-en>Münster, Germany</span><span data-only-de>Münster, Deutschland</span>
+          </div>
+        </div>
+        <p class="role-desc" data-only-en>Co-founded a compliance SaaS startup at 22 (<strong>€100k federal grant</strong>, sold shares before joining McKinsey). Built and led a 4-person sales team, fed 500+ companies into the pipeline, ran 50+ business meetings. Selected and rolled out <strong>Salesforce</strong> CRM.</p>
+        <p class="role-desc" data-only-de>Mit 22 Mitgründer eines Compliance-SaaS-Startups (<strong>100.000 € Bundesgründerstipendium</strong>, Anteile vor Eintritt bei McKinsey verkauft). Aufbau und Führung eines 4-köpfigen Sales-Teams, 500+ Unternehmen in die Pipeline gespielt, 50+ Business-Meetings durchgeführt. Auswahl und Rollout von <strong>Salesforce</strong> als CRM.</p>
+      </article>
+
+      <section style="margin-top: 8px;">
+        <h2 class="section-label" style="margin-bottom: 8px;">
+          <span data-only-en>Earlier Experience</span>
+          <span data-only-de>Frühere Stationen</span>
+        </h2>
+        <div class="early-list">
+          <div class="early-item" data-only-en>
+            <strong>Management Consulting Intern</strong> · <strong>McKinsey &amp; Company</strong> · Stuttgart · 02.2015 – 04.2015
+            <span class="muted"> — IT-services pricing approach for a global insurance group; pilot planning and line-organization buildup.</span>
+          </div>
+          <div class="early-item" data-only-de>
+            <strong>Praktikant, Management Consulting</strong> · <strong>McKinsey &amp; Company</strong> · Stuttgart · 02.2015 – 04.2015
+            <span class="muted"> — IT-Service-Pricing-Ansatz für einen globalen Versicherer; Pilot-Planung und Aufbau der Linienorganisation.</span>
+          </div>
+          <div class="early-item" data-only-en>
+            <strong>Management Consulting Intern</strong> · <strong>Accenture</strong> · Düsseldorf · 05.2013 – 08.2013
+            <span class="muted"> — Core-insurance software rollout at a top-3 German insurer; test reporting in VBA, status reporting for steering committee.</span>
+          </div>
+          <div class="early-item" data-only-de>
+            <strong>Praktikant, Management Consulting</strong> · <strong>Accenture</strong> · Düsseldorf · 05.2013 – 08.2013
+            <span class="muted"> — Rollout einer Kern-Versicherungssoftware bei einem Top-3-Versicherer; Test-Reporting in VBA, Status-Reporting für den Steering-Committee.</span>
+          </div>
+          <div class="early-item" data-only-en>
+            <strong>Project Management Intern</strong> · <strong>Robert Bosch</strong> · Stuttgart · 01.2012 – 05.2012
+            <span class="muted"> — International CRM consolidation across 9 business divisions; invited to join the Students@Bosch program for performance.</span>
+          </div>
+          <div class="early-item" data-only-de>
+            <strong>Praktikant, Projektmanagement</strong> · <strong>Robert Bosch</strong> · Stuttgart · 01.2012 – 05.2012
+            <span class="muted"> — Internationale CRM-Konsolidierung über 9 Business Divisions; Einladung ins Students@Bosch-Programm aufgrund der Leistung.</span>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section>
+      <h2 class="section-label">
+        <span data-only-en>Education</span>
+        <span data-only-de>Bildung</span>
+      </h2>
+      <div class="edu-item">
+        <div class="edu-title">
+          <span data-only-en>M.Sc. Data Science <span style="color:var(--text-muted); font-weight:400;">— GPA 3.98 / 4.0 · Top 5%</span></span>
+          <span data-only-de>M.Sc. Data Science <span style="color:var(--text-muted); font-weight:400;">— GPA 3,98 / 4,0 · Top 5 %</span></span>
+        </div>
+        <div class="edu-meta">09.2015 – 12.2016 · Northwestern University ·
+          <span data-only-en>Evanston, USA</span><span data-only-de>Evanston, USA</span>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-title">
+          <span data-only-en>B.Sc. Information Systems <span style="color:var(--text-muted); font-weight:400;">— 1.7 / 6 · Top 10%</span></span>
+          <span data-only-de>B.Sc. Wirtschaftsinformatik <span style="color:var(--text-muted); font-weight:400;">— 1,7 · Top 10 %</span></span>
+        </div>
+        <div class="edu-meta">10.2009 – 05.2013 · Münster University ·
+          <span data-only-en>Germany</span><span data-only-de>Deutschland</span>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-title">
+          <span data-only-en>Exchange semester <span style="color:var(--text-muted); font-weight:400;">— Business Analytics, Globalization</span></span>
+          <span data-only-de>Auslandssemester <span style="color:var(--text-muted); font-weight:400;">— Business Analytics, Globalisierung</span></span>
+        </div>
+        <div class="edu-meta">07.2011 – 12.2011 · University of Melbourne ·
+          <span data-only-en>Australia</span><span data-only-de>Australien</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-label">
+        <span data-only-en>Recognition</span>
+        <span data-only-de>Auszeichnungen</span>
+      </h2>
+      <ul class="recognition-list">
+        <li data-only-en><strong>Toastmasters International</strong> — Prepared Speech Contest, won three contest levels, competed at international level</li>
+        <li data-only-de><strong>Toastmasters International</strong> — Prepared Speech Contest, drei Wettbewerbsebenen gewonnen, internationale Ebene</li>
+        <li data-only-en><strong>Fulbright Scholarship</strong> for studies in the United States</li>
+        <li data-only-de><strong>Fulbright-Stipendium</strong> für ein Studium in den USA</li>
+        <li data-only-en><strong>2nd place, Top 0.1%</strong> — Deloitte Worldwide Case Study Competition, Bangkok</li>
+        <li data-only-de><strong>2. Platz, Top 0,1 %</strong> — Deloitte Worldwide Case Study Competition, Bangkok</li>
+        <li data-only-en><strong>€100,000 startup grant</strong> from the Federal Republic of Germany</li>
+        <li data-only-de><strong>100.000 € Gründerstipendium</strong> der Bundesrepublik Deutschland</li>
+        <li data-only-en><strong>DAAD PROMOS</strong> scholarship for studies abroad</li>
+        <li data-only-de><strong>DAAD-PROMOS</strong>-Stipendium für ein Auslandsstudium</li>
+        <li data-only-en>Several startup prizes at Münster startup competitions</li>
+        <li data-only-de>Mehrere Gründerpreise bei Startup-Wettbewerben in Münster</li>
+        <li data-only-en>Member of <strong>Mensa International</strong></li>
+        <li data-only-de>Mitglied bei <strong>Mensa International</strong></li>
+      </ul>
+    </section>
+  </main>
+</div>
+
+<footer class="site-footer no-print">
+  <div>© 2026 Jan Lubatschowski · built with <span class="heart">♥</span> and <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a> <span data-only-en>· <a href="https://janlubatschowski.lemonsqueezy.com" target="_blank" rel="noopener" style="color:var(--accent);">Get this CV + portfolio template — $29</a></span><span data-only-de>· <a href="https://janlubatschowski.lemonsqueezy.com" target="_blank" rel="noopener" style="color:var(--accent);">Dieses CV + Portfolio-Template kaufen — 29 €</a></span></div>
+  <div>
+    <a href="projects/index.html"><span data-only-en>Project portfolio</span><span data-only-de>Projektportfolio</span></a>
+    · <a href="https://linkedin.com/in/janlubatschowski" target="_blank" rel="noopener">LinkedIn</a>
+    · <a href="https://github.com/qpo" target="_blank" rel="noopener">GitHub</a>
+    · <a href="mailto:JanLubatschowski@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+  function exportPDF() {
+    const lang = document.documentElement.getAttribute("lang") || "en";
+    const filename = lang === "de" ? "Jan_Lubatschowski_Lebenslauf.pdf" : "Jan_Lubatschowski_CV.pdf";
+    if (typeof html2pdf === "undefined") {
+      alert("PDF-Bibliothek noch nicht geladen — bitte kurz warten und erneut klicken.");
+      return;
+    }
+    document.body.classList.add("pdf-export");
+    const opt = {
+      margin: [12, 10, 12, 10],
+      filename: filename,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, logging: false, windowWidth: 1100 },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      pagebreak: { mode: ["css", "legacy", "avoid-all"], avoid: ".role, .edu-item, .recognition-list li, .early-item, .profile" }
+    };
+    html2pdf().set(opt).from(document.body).save().then(() => {
+      document.body.classList.remove("pdf-export");
+    }).catch((err) => {
+      console.error(err);
+      document.body.classList.remove("pdf-export");
+    });
+  }
+  function setLang(lang) {
+    document.documentElement.setAttribute("lang", lang);
+    document.getElementById("lang-en").classList.toggle("active", lang === "en");
+    document.getElementById("lang-de").classList.toggle("active", lang === "de");
+    try { localStorage.setItem("siteLang", lang); } catch (e) {}
+  }
+  document.getElementById("lang-en").addEventListener("click", () => setLang("en"));
+  document.getElementById("lang-de").addEventListener("click", () => setLang("de"));
+  // Init
+  let initial = "en";
+  try {
+    const stored = localStorage.getItem("siteLang");
+    if (stored === "en" || stored === "de") initial = stored;
+  } catch (e) {}
+  setLang(initial);
+</script>
+
+</body>
+</html>

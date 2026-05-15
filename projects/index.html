@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jan Lubatschowski — Project Experience</title>
+<style>
+  :root {
+    --bg: #faf9f6;
+    --surface: #ffffff;
+    --surface-2: #f4f2ed;
+    --border: #e8e6e0;
+    --border-strong: #d4d1c8;
+    --text: #1a1a1a;
+    --text-muted: #6b6b6b;
+    --text-faint: #9a9a9a;
+    --accent: #c8553d;
+    --accent-soft: #f3d8d2;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-hover: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+    --shadow-modal: 0 20px 50px rgba(0,0,0,0.2), 0 8px 20px rgba(0,0,0,0.1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    font-size: 15px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    min-height: 100vh;
+    padding: 32px 24px 80px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  header { margin-bottom: 36px; }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+  .subtitle { color: var(--text); font-size: 17px; }
+  .stats {
+    display: flex;
+    gap: 36px;
+    margin: 28px 0 36px;
+    flex-wrap: wrap;
+  }
+  .stat .num {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  .stat .label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+  }
+
+  /* Timeline */
+  .timeline-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+  }
+  .timeline-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+  }
+  .timeline { position: relative; height: 130px; }
+  .timeline-axis {
+    position: absolute; bottom: 16px; left: 0; right: 0;
+    height: 1px; background: var(--border-strong);
+  }
+  .timeline-tick {
+    position: absolute; bottom: 0;
+    transform: translateX(-50%);
+    font-size: 10px; color: var(--text-muted);
+  }
+  .timeline-tick::before {
+    content: ""; position: absolute;
+    bottom: 12px; left: 50%;
+    width: 1px; height: 4px;
+    background: var(--border-strong);
+  }
+  .tl-bar {
+    position: absolute;
+    height: 12px;
+    border-radius: 4px;
+    opacity: 0.85;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .tl-bar:hover {
+    opacity: 1;
+    transform: scaleY(1.25);
+    z-index: 2;
+  }
+  .tl-bar.dim { opacity: 0.15; }
+  .tl-bar.projected {
+    background: transparent !important;
+    border: 1.5px dashed;
+    border-left: none;
+    box-sizing: border-box;
+    opacity: 0.65;
+  }
+  .tl-group {
+    position: absolute;
+    cursor: pointer;
+  }
+  .tl-group .tl-bar { transition: opacity 0.15s, transform 0.15s; }
+  .tl-group.dim .tl-bar { opacity: 0.15; }
+  /* Continuous bar look: solid has only left corners rounded, projected only right */
+  .tl-group > .tl-bar:not(.projected) { border-radius: 4px 0 0 4px; }
+  .tl-group > .tl-bar.projected {
+    border-radius: 0 4px 4px 0;
+    pointer-events: none;
+  }
+  /* Solid bar inside group: hover scales it; dashed bar never reacts */
+  .tl-group:hover { z-index: 2; }
+
+
+
+  .tl-band {
+    position: absolute;
+    top: 0;
+    bottom: 12px;
+    border-radius: 5px;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .tl-band-label {
+    position: absolute;
+    top: 2px;
+    left: 8px;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    opacity: 0.85;
+    white-space: nowrap;
+  }
+  .tl-band-label.centered {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .tl-bar { z-index: 1; }
+
+  .pdf-export .topbar,
+  .pdf-export .controls,
+  .pdf-export .filter-section,
+  .pdf-export .backdrop,
+  .pdf-export .result-count { display: none !important; }
+  .pdf-export {
+    max-width: none !important;
+    width: 794px !important;
+    margin: 0 !important;
+    padding: 14px !important;
+    background: white !important;
+  }
+  .pdf-export .projects {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+  .pdf-export .card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none;
+    padding: 12px !important;
+  }
+  .pdf-export .card-desc { max-height: none; }
+  .pdf-export .card-desc::after { display: none; }
+  .pdf-export .stats { margin: 10px 0 16px; gap: 20px; }
+  .pdf-export .stat .num { font-size: 20px; }
+  .pdf-export .timeline-wrap { padding: 12px 16px; margin-bottom: 14px; }
+  .pdf-export .timeline { height: 110px; }
+  .pdf-export header { margin-bottom: 12px; }
+  .pdf-export h1 { font-size: 28px; }
+  .pdf-export .subtitle { font-size: 13px; }
+
+  /* Controls */
+  .controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .search-input {
+    flex: 1;
+    min-width: 240px;
+    padding: 10px 14px;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    font-size: 14px;
+    background: var(--surface);
+    font-family: inherit;
+    color: var(--text);
+    outline: none;
+    transition: border 0.15s, box-shadow 0.15s;
+  }
+  .search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .reset-btn {
+    padding: 10px 16px;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    background: var(--surface);
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .reset-btn:hover { border-color: var(--text); color: var(--text); }
+  .toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+    user-select: none;
+  }
+  .toggle input { cursor: pointer; }
+
+  /* Filter chips */
+  .filter-section { margin-bottom: 8px; }
+  .filter-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .chips {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    vertical-align: middle;
+  }
+  .chip {
+    padding: 4px 10px;
+    border: 1px solid var(--border-strong);
+    border-radius: 14px;
+    background: var(--surface);
+    font-size: 12px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .chip:hover { border-color: var(--text); color: var(--text); }
+  .chip.active {
+    background: var(--text);
+    color: var(--surface);
+    border-color: var(--text);
+  }
+  .chip.llm {
+    border-color: #c4b5fd;
+    color: #6d28d9;
+    background: #f5f3ff;
+  }
+  .chip.llm:hover { border-color: #7c3aed; color: #7c3aed; }
+  .chip.llm.active {
+    background: #7c3aed;
+    color: var(--surface);
+    border-color: #7c3aed;
+  }
+  .chip .dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+    background: currentColor;
+    opacity: 0.7;
+  }
+
+  .result-count {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin: 18px 0 12px;
+  }
+
+  .card-print-meta {
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    font-size: 11.5px;
+    color: var(--text-muted);
+  }
+  .card-print-meta .row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 3px;
+  }
+  .card-print-meta .key::after { content: ":"; margin-right: 4px; }
+  .card-print-meta .key {
+    color: var(--text-faint);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 9.5px;
+    letter-spacing: 0.05em;
+    min-width: 90px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+  .card-print-meta .val { color: var(--text); flex: 1; }
+
+  /* Projects grid */
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    cursor: pointer;
+    transition: box-shadow 0.15s, border 0.15s, transform 0.12s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+  }
+  .card-stripe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+  }
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    gap: 12px;
+  }
+  .card-num {
+    font-size: 11px;
+    color: var(--text-faint);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 4px 0;
+  }
+  .card-org {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .card-org strong { color: var(--text); font-weight: 500; }
+  .role-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 8px 2px 6px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .role-chip .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+  .card-desc {
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.55;
+    max-height: 4.6em;
+    overflow: hidden;
+    position: relative;
+  }
+  .card-desc::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1.5em;
+    background: linear-gradient(to bottom, transparent, var(--surface));
+    pointer-events: none;
+  }
+  .empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  /* Modal */
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(28, 25, 22, 0.45);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease;
+  }
+  .backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal {
+    background: var(--surface);
+    border-radius: 14px;
+    max-width: 720px;
+    width: 100%;
+    max-height: calc(100vh - 48px);
+    overflow: auto;
+    box-shadow: var(--shadow-modal);
+    transform: translateY(8px) scale(0.98);
+    transition: transform 0.22s ease;
+    position: relative;
+    border: 1px solid var(--border);
+  }
+  .backdrop.open .modal {
+    transform: translateY(0) scale(1);
+  }
+  .modal-stripe {
+    height: 5px;
+    width: 100%;
+    border-radius: 14px 14px 0 0;
+  }
+  .modal-body {
+    padding: 28px 32px 32px;
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 30px; height: 30px;
+    background: var(--surface-2);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+  }
+  .modal-close:hover {
+    background: var(--text);
+    color: var(--surface);
+  }
+  .modal-meta {
+    font-size: 11px;
+    color: var(--text-faint);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .modal-title {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .modal-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .modal-desc {
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin-bottom: 22px;
+    color: var(--text);
+  }
+  .modal-details {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 10px 18px;
+    font-size: 13px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  .modal-details .key {
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 11px;
+    padding-top: 2px;
+  }
+  .modal-details .val {
+    color: var(--text);
+  }
+  .modal-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .nav-btn {
+    background: none;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: inherit;
+    color: var(--text-muted);
+    transition: all 0.15s;
+  }
+  .nav-btn:hover:not(:disabled) {
+    border-color: var(--text);
+    color: var(--text);
+  }
+  .nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+
+  html[lang="en"] [data-only-de] { display: none !important; }
+  html[lang="de"] [data-only-en] { display: none !important; }
+  .topbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .topbar .reset-btn {
+    padding: 5px 14px;
+    font-size: 12px;
+    border-radius: 20px;
+    line-height: 1.5;
+  }
+  .lang-toggle {
+    display: inline-flex;
+    border: 1px solid var(--border-strong);
+    border-radius: 20px;
+    overflow: hidden;
+    font-size: 12px;
+    background: var(--surface);
+  }
+  .lang-toggle button {
+    padding: 5px 14px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .lang-toggle button.active {
+    background: var(--text);
+    color: var(--surface);
+  }
+  .flag {
+    width: 18px;
+    height: 12px;
+    border-radius: 1px;
+    vertical-align: middle;
+    margin-right: 6px;
+    display: inline-block;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+  }
+  .lang-toggle button {
+    display: inline-flex;
+    align-items: center;
+  }
+
+
+
+  .site-footer {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-faint);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .site-footer a { color: var(--text-muted); text-decoration: none; border-bottom: 1px solid var(--border); }
+  .site-footer a:hover { border-color: var(--text); color: var(--text); }
+  .site-footer .heart { color: #c8553d; }
+  .anthropic-mark {
+    width: 11px;
+    height: 11px;
+    vertical-align: -1px;
+    margin-right: 3px;
+    display: inline-block;
+  }
+  .claude-link {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    body { padding: 20px 16px 60px; }
+    h1 { font-size: 28px; }
+    .stats { gap: 24px; }
+    .stat .num { font-size: 22px; }
+    .timeline-wrap { padding: 16px; }
+    .projects { grid-template-columns: 1fr; }
+    .modal-body { padding: 22px; }
+    .modal-details { grid-template-columns: 1fr; gap: 4px 0; }
+    .modal-details .key { margin-top: 8px; }
+  }
+
+  /* Print */
+  @media print {
+    @page {
+      margin: 10mm 8mm;
+      size: A4;
+    }
+    html, body {
+      background: white !important;
+      max-width: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      color-adjust: exact;
+    }
+    .topbar, .controls, .filter-section, .backdrop, .result-count, .site-footer { display: none !important; }
+    .projects { grid-template-columns: 1fr !important; gap: 8px !important; }
+    .card {
+      break-inside: avoid;
+      page-break-inside: avoid;
+      box-shadow: none !important;
+      padding: 12px 14px !important;
+    }
+    .card-desc { max-height: none !important; }
+    .card-desc::after { display: none !important; }
+    .card-print-meta { display: block !important; }
+    .stats { margin: 10px 0 16px; gap: 20px; }
+    .stat .num { font-size: 20px; }
+    .timeline-wrap {
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    .timeline { height: 110px; }
+    .tl-bar, .tl-bar.projected, .tl-band, .tl-band-label, .stat .num, .chip, .chip.llm, .role-chip, .card-stripe {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    header { margin-bottom: 12px; }
+    h1 { font-size: 24px; }
+    .subtitle { font-size: 13px; }
+    a { border-bottom: none; color: inherit; }
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+</head>
+<body>
+
+
+<div class="topbar">
+  <button class="reset-btn" type="button" onclick="window.print()" style="font-size:12px; padding:5px 14px; border-radius:20px; line-height:1.5;">
+    <span data-only-en>Export as PDF</span>
+    <span data-only-de>Als PDF exportieren</span>
+  </button>
+  <a class="reset-btn" href="../index.html" style="text-decoration:none;">
+    <span data-only-en>← CV</span>
+    <span data-only-de>← Lebenslauf</span>
+  </a>
+  <div class="lang-toggle" role="tablist">
+    <button id="lang-en" class="active" type="button"><svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><clipPath id="ujt"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#ujt)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>EN</button>
+    <button id="lang-de" type="button"><svg class="flag" viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="1" y="0" fill="#000"/><rect width="5" height="1" y="1" fill="#DD0000"/><rect width="5" height="1" y="2" fill="#FFCE00"/></svg>DE</button>
+  </div>
+</div>
+
+<header>
+  <div class="hero-eyebrow">
+    <span data-only-en>Project Portfolio</span>
+    <span data-only-de>Projektportfolio</span>
+  </div>
+  <h1>Jan Lubatschowski</h1>
+  <div class="subtitle"><span data-only-en>Data Scientist → Project Lead. Data, Analytics, AI.</span><span data-only-de>Data Scientist → Projektleiter. Data, Analytics, AI.</span></div>
+</header>
+
+<section class="stats" id="stats"></section>
+
+<section class="timeline-wrap">
+  <div class="timeline-title"><span data-only-en>Timeline · 2012–2026 · click a bar for details</span><span data-only-de>Zeitstrahl · 2012–2026 · Balken klicken für Details</span></div>
+  <div class="timeline" id="timeline"></div>
+</section>
+
+<div class="controls">
+  <input class="search-input" id="search" placeholder="Search descriptions, tech, customer…" type="search">
+  <button class="reset-btn" id="reset"><span data-only-en>Reset filters</span><span data-only-de>Filter zurücksetzen</span></button>
+</div>
+
+<div class="filter-section">
+  <span class="filter-label"><span data-only-en>Industry</span><span data-only-de>Branche</span></span>
+  <span class="chips" id="chips-industry"></span>
+</div>
+<div class="filter-section">
+  <span class="filter-label"><span data-only-en>Country</span><span data-only-de>Land</span></span>
+  <span class="chips" id="chips-country"></span>
+</div>
+<div class="filter-section">
+  <span class="filter-label"><span data-only-en>Role</span><span data-only-de>Rolle</span></span>
+  <span class="chips" id="chips-role"></span>
+</div>
+<div class="filter-section">
+  <span class="filter-label"><span data-only-en>Tech</span><span data-only-de>Tech</span></span>
+  <span class="chips" id="chips-tech"></span>
+</div>
+
+<div class="result-count" id="count"></div>
+
+<section class="projects" id="projects"></section>
+
+<!-- Modal -->
+<div class="backdrop" id="backdrop">
+  <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-stripe" id="modal-stripe"></div>
+    <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+
+<footer class="site-footer">
+  <div>© 2026 Jan Lubatschowski · built with <span class="heart">♥</span> and <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a> <span data-only-en>· <a href="https://janlubatschowski.lemonsqueezy.com" target="_blank" rel="noopener" style="color:var(--accent);">Get this CV + portfolio template — $29</a></span><span data-only-de>· <a href="https://janlubatschowski.lemonsqueezy.com" target="_blank" rel="noopener" style="color:var(--accent);">Dieses CV + Portfolio-Template kaufen — 29 €</a></span></div>
+  <div>
+    <a href="../index.html"><span data-only-en>CV</span><span data-only-de>Lebenslauf</span></a> · <a href="https://linkedin.com/in/janlubatschowski" target="_blank" rel="noopener">LinkedIn</a>
+    · <a href="https://github.com/qpo" target="_blank" rel="noopener">GitHub</a>
+    · <a href="mailto:JanLubatschowski@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+const PROJECTS = [
+  {num:1,from:"2012-01",to:"2012-05",months:4,industry:"Automotive",level:"Professional",type:"IT Project",naming:"ok to name",organization:"Robert Bosch GmbH",customer:"Robert Bosch GmbH",category:"",country:"Germany",role:"Project member",resp:"Implementation, Communication",tech:"Powerpoint, Visio",ref:"yes",desc_en:"Supported an international IT project consolidating sales software across business units. Areas of responsibility: process management rollout, usability, testing, development support, knowledge management.",desc_de:"Unterstützung eines internationalen IT-Projekts zur Konsolidierung von Sales-Software über Geschäftsbereiche hinweg. Verantwortungsbereiche: Prozessmanagement-Rollout, Usability, Testing, Entwicklungsunterstützung, Wissensmanagement."},
+  {num:2,from:"2013-05",to:"2013-08",months:4,industry:"Insurance",level:"Professional",type:"IT Project",naming:"keep anonymous",organization:"Accenture",customer:"",category:"Top 3 Insurance",country:"Germany",role:"Project member",resp:"Implementation, Communication",tech:"VBA, Excel, Powerpoint",ref:"yes",desc_en:"Supported an IT project implementing new core software at a German insurance company. Owned test management; optimized the reporting process by extending existing VBA expertise.",desc_de:"Teammitglied im IT-Projektmanagement für die Einführung einer neuen Kern-Software bei einem deutschen Versicherer. Zuständig für Testmanagement, Optimierung des Reporting-Prozesses durch Nutzung und Weiterentwicklung bestehender VBA-Kenntnisse."},
+  {num:3,from:"2015-02",to:"2015-04",months:3,industry:"Insurance",level:"Professional",type:"IT Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 3 Insurance",country:"Germany",role:"Project member",resp:"Implementation, Communication",tech:"Excel, Powerpoint",ref:"yes",desc_en:"Developed an approach for volume-based pricing of IT-services between corporate entities. Supported buildup of the line organization for Controlling, Portfolio Mgmt, and Project Mgmt of a new corporate entity.",desc_de:"Entwicklung eines Ansatzes für volumenbasierte Verrechnung von IT-Services zwischen Konzerneinheiten. Unterstützung des Aufbaus der Linienorganisation für Controlling, Portfolio-Management und Projektmanagement einer neuen Konzerneinheit."},
+  {num:4,from:"2015-09",to:"2015-09",months:0.5,industry:"Retail",level:"Student",type:"Data Science Project",naming:"ok to name",organization:"Northwestern University",customer:"Enova International",category:"",country:"United States",role:"Project lead",resp:"Implementation, Communication, Stakeholder Mgmt",tech:"R, Powerpoint",ref:"",desc_en:"Predicted retail value of diamonds based on properties such as color, weight, purity.",desc_de:"Vorhersage des Einzelhandelswerts von Diamanten basierend auf Eigenschaften wie Farbe, Gewicht und Reinheit."},
+  {num:5,from:"2015-09",to:"2015-12",months:3,industry:"Retail",level:"Student",type:"Data Science Project",naming:"ok to name",organization:"Northwestern University",customer:"Trunk Club",category:"",country:"United States",role:"Project member",resp:"Implementation, Communication, Stakeholder Mgmt",tech:"R, SQL, Powerpoint",ref:"",desc_en:"Forecasted demand for an online fashion retailer using random forests; derived business decision support for marketing and logistics.",desc_de:"Nachfrageprognose für einen Online-Fashion-Retailer mittels Random Forests; Ableitung von Entscheidungsunterstützung für Marketing und Logistik."},
+  {num:6,from:"2016-01",to:"2016-06",months:6,industry:"Public Sector",level:"Student",type:"Data Science Project",naming:"ok to name",organization:"Northwestern University",customer:"Chicago Park District",category:"",country:"United States",role:"Project lead",resp:"Implementation, Communication, Stakeholder Mgmt",tech:"R, D3, Powerpoint",ref:"",desc_en:"\"The Power of Parks\": Built statistical models explaining the effect of the US' largest public park system on nearby property values. Predicted demand for public activity programs. Ran sentiment analysis on structured and unstructured data from 10,000+ survey responses.",desc_de:"„The Power of Parks\": Statistische Modelle zur Erklärung des Effekts des größten US-Park-Systems auf umliegende Immobilienwerte. Vorhersage der Nachfrage nach öffentlichen Aktivitätsprogrammen. Sentiment-Analyse auf strukturierten und unstrukturierten Daten aus 10.000+ Umfrageantworten."},
+  {num:7,from:"2016-05",to:"2016-06",months:1,industry:"Telecommunications",level:"Student",type:"Data Science Project",naming:"ok to name",organization:"Northwestern University",customer:"Suddenlink",category:"",country:"United States",role:"Project lead",resp:"Implementation, Communication, Stakeholder Mgmt",tech:"R, Powerpoint",ref:"",desc_en:"\"Cord cutters\": Predicted churn likelihood of cable TV subscribers based on set-top box activity data.",desc_de:"„Cord cutters\": Vorhersage der Churn-Wahrscheinlichkeit von Kabel-TV-Abonnent:innen anhand von Set-Top-Box-Aktivitätsdaten."},
+  {num:8,from:"2016-06",to:"2016-09",months:3,industry:"Public Sector",level:"Student",type:"Data Science Project",naming:"ok to name",organization:"United Nations",customer:"United Nations",category:"",country:"Switzerland",role:"Project lead",resp:"Implementation, Communication, Stakeholder Mgmt",tech:"R, Powerpoint",ref:"yes",desc_en:"Built a model explaining migration flows in African countries, linking census data and a dataset on violent outbreaks.",desc_de:"Modell zur Erklärung von Migrationsströmen in afrikanischen Ländern, basierend auf der Verknüpfung von Zensus-Daten und einem Datensatz zu gewaltsamen Ausbrüchen."},
+  {num:9,from:"2016-10",to:"2016-12",months:3,industry:"Information Technology",level:"Student",type:"Data Science Project",naming:"ok to name",organization:"Northwestern University",customer:"HERE Technologies",category:"",country:"United States",role:"Project lead",resp:"Implementation, Communication, Stakeholder Mgmt",tech:"R, Powerpoint",ref:"",desc_en:"Predicted true location of highway construction zones based on vehicle navigation data in collaboration with the customer, using descriptive and predictive analytics. Led a team of five students through all project stages from obtaining data to final presentation and write-up of a white paper.",desc_de:"Vorhersage der tatsächlichen Position von Autobahn-Baustellen anhand von Fahrzeug-Navigationsdaten in Zusammenarbeit mit dem Kunden, mittels deskriptiver und prädiktiver Analytik. Führung eines fünfköpfigen Studententeams durch alle Projektphasen — von der Datenbeschaffung bis zur Abschlusspräsentation und zum White Paper."},
+  {num:10,from:"2017-02",to:"2017-02",months:1,industry:"Chemicals",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 3 Chemical company",country:"Germany",role:"Project member",resp:"Implementation, Communication",tech:"VBA, Excel",ref:"yes",desc_en:"Implemented and extended an economic model for price movement of chemical commodities to support C-suite with long-term investment decisions, using Excel and VBA.",desc_de:"Implementierung und Erweiterung eines ökonomischen Modells zur Vorhersage von Preisbewegungen chemischer Commodities zur Unterstützung der C-Suite bei langfristigen Investitionsentscheidungen, mit Excel und VBA."},
+  {num:11,from:"2017-03",to:"2017-05",months:3,industry:"Mining",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 3 Mining company",country:"Belgium",role:"Project member",resp:"Implementation, Communication",tech:"VBA, Gurobi Solver, Excel",ref:"",desc_en:"Built and implemented a production-planning optimization tool for reducing waste and maximizing output of a Western European mine with about 200 workers and 50 machines permanently on-site.",desc_de:"Aufbau und Einführung eines Produktionsplanungs-Optimierungstools zur Reduzierung von Ausschuss und Maximierung des Outputs einer westeuropäischen Mine mit rund 200 Mitarbeitenden und 50 fest stationierten Maschinen."},
+  {num:12,from:"2017-05",to:"2017-12",months:7,industry:"Insurance",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 10 Insurance",country:"Germany",role:"Project member",resp:"Strategy, Implementation, Communication, Stakeholder Mgmt",tech:"R, Excel, Powerpoint",ref:"yes",desc_en:"New-business buildout for a digital insurance subsidiary of a large German insurance group. Developed the analytics strategy and implemented novel, analytics-based pricing mechanisms for individual insurance products.",desc_de:"Neugeschäftsaufbau für ein digitales Versicherungsunternehmen einer großen deutschen Versicherungsgruppe. Entwicklung der Analytics-Strategie. Einführung neuartiger, analytics-basierter Pricing-Mechanismen für einzelne Versicherungsprodukte."},
+  {num:13,from:"2018-01",to:"2018-04",months:4,industry:"Telecommunications",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 3 Telco",country:"Switzerland",role:"Project member",resp:"Implementation, Communication",tech:"R, Excel, Powerpoint",ref:"yes",desc_en:"Predicted churn likelihood of mobile phone customers based on demographics and activity data. Built and executed a tiered marketing response management tool for reducing actual churn, based on predicted reasons for customers with high churn probability.",desc_de:"Vorhersage der Churn-Wahrscheinlichkeit von Mobilfunkkund:innen anhand von Demografie- und Aktivitätsdaten. Aufbau und Einführung eines gestaffelten Marketing-Response-Tools zur Reduzierung tatsächlichen Churns, basierend auf vorhergesagten Churn-Gründen bei Kund:innen mit hoher Abwanderungswahrscheinlichkeit."},
+  {num:14,from:"2018-05",to:"2018-07",months:3,industry:"Health Insurance (public)",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 10 Health Insurance",country:"Germany",role:"Project member",resp:"Implementation, Communication",tech:"R, Excel, Powerpoint",ref:"yes",desc_en:"Developed models for predicting claims fraud from 800,000 yearly invoices. Built a decision engine on top of the predictive model to prioritize claimants for follow-up interventions.",desc_de:"Entwicklung von Modellen zur Vorhersage von Versicherungsbetrug aus 800.000 jährlichen Rechnungen. Aufbau einer Decision-Engine auf Basis des Vorhersagemodells zur Priorisierung von Anspruchstellenden für Folge-Interventionen."},
+  {num:15,from:"2018-07",to:"2018-07",months:1,industry:"Consulting",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"",country:"Germany",role:"Project lead",resp:"Implementation, Communication, Stakeholder Mgmt",tech:"R, Powerpoint, Pen & Paper",ref:"yes",desc_en:"Conceptualized, implemented and organized Europe-wide Data Science training sessions for consultants.",desc_de:"Konzeption, Umsetzung und Organisation europaweiter Data-Science-Trainings für Berater:innen."},
+  {num:16,from:"2018-08",to:"2018-10",months:3,industry:"Manufacturing",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 3 Agricultural Machinery Maker",country:"Germany",role:"Project member",resp:"Implementation, Communication",tech:"R, Tableau, Alteryx, Excel, Powerpoint",ref:"",desc_en:"Built early parts defect prediction model based on Weibull distribution failure simulations - conceptualized, built and implemented various Tableau dashboards for services team to get early indication of faulty parts.",desc_de:"Aufbau eines Bauteil-Defekt-Frühvorhersagemodells auf Basis von Weibull-Ausfallsimulationen — Konzeption, Aufbau und Einführung verschiedener Tableau-Dashboards für das Service-Team zur frühen Erkennung fehlerhafter Bauteile."},
+  {num:17,from:"2018-10",to:"2018-11",months:1,industry:"Consulting",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"",country:"Germany",role:"Project lead",resp:"Implementation, Communication, Stakeholder Mgmt",tech:"R, Powerpoint, Pen & Paper",ref:"yes",desc_en:"Conceptualized, implemented and organized Europe-wide Data Science training sessions for consultants.",desc_de:"Konzeption, Umsetzung und Organisation europaweiter Data-Science-Trainings für Berater:innen."},
+  {num:18,from:"2018-11",to:"2018-12",months:2,industry:"Health Insurance (private)",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 20 Health Insurance",country:"Germany",role:"Project member",resp:"Implementation, Communication",tech:"R, Alteryx, Excel, Powerpoint",ref:"yes",desc_en:"Spend analysis: Developed descriptive dashboards showing costs by ICD-10 sickness code category. Benchmarked against national averages and derived decision-support solutions for deep-diving into overspend.",desc_de:"Spend-Analyse: Entwicklung deskriptiver Dashboards zur Darstellung von Kosten nach ICD-10-Krankheitskategorie. Benchmarking gegen nationale Durchschnittswerte und Ableitung von Decision-Support-Lösungen für Deep-Dives in Überausgaben."},
+  {num:19,from:"2019-01",to:"2019-03",months:3,industry:"Health Insurance (public)",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 15 Health Insurance",country:"Germany",role:"Project member",resp:"Implementation, Communication",tech:"R, Alteryx, Excel, Powerpoint",ref:"yes",desc_en:"Claims analysis: Developed descriptive and predictive analyses to assess and optimize the claims process for a given healthcare category , improving effectiveness and reducing fraud.",desc_de:"Claims-Analyse: Entwicklung deskriptiver und prädiktiver Analysen zur Bewertung und Optimierung des Schadenbearbeitungsprozesses für eine bestimmte Healthcare-Kategorie, mit dem Ziel höherer Effektivität und reduzierten Betrugs."},
+  {num:20,from:"2019-03",to:"2019-12",months:8,industry:"Health Insurance (public)",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 3 Health Insurance",country:"Germany",role:"Project member",resp:"Implementation, Communication, Stakeholder Mgmt",tech:"R, Python, Tableau, Excel, Powerpoint",ref:"yes",desc_en:"Developed descriptive dashboards and predictive solutions for understanding unmet customer needs as part of a large Customer-Experience Transformation. Conceptualized a new set of feedback forms and built hierarchical predictive models that minimize question count while preserving insight quality and actionability.",desc_de:"Entwicklung deskriptiver Dashboards und prädiktiver Lösungen zum Verständnis unerfüllter Kundenbedürfnisse im Rahmen einer großen Customer-Experience-Transformation. Konzeption und Entwicklung eines neuen Sets von Feedback-Fragebögen sowie hierarchischer Vorhersagemodelle zum Verständnis von Zusammenhängen — mit dem Ziel, die Fragebogenlänge zu minimieren bei gleichbleibender Insight-Qualität und Handlungsableitung."},
+  {num:21,from:"2019-10",to:"2019-10",months:0.5,industry:"Health Insurance (public)",level:"Professional",type:"Project Proposal",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 3 Health Insurance",country:"Germany",role:"Project member",resp:"Communication",tech:"Powerpoint",ref:"yes",desc_en:"Wrote project proposals for new Data Science engagements.",desc_de:"Verfassen von Projektvorschlägen für neue Data-Science-Engagements."},
+  {num:22,from:"2019-12",to:"2019-12",months:0.5,industry:"Public Sector",level:"Professional",type:"Project Proposal",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"German Federal Agency",country:"Germany",role:"Project member",resp:"Communication",tech:"Powerpoint",ref:"yes",desc_en:"Wrote project proposals for new Data Science engagements.",desc_de:"Verfassen von Projektvorschlägen für neue Data-Science-Engagements."},
+  {num:23,from:"2020-01",to:"2020-01",months:1,industry:"Banking",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 3 Banking Group",country:"Germany",role:"Project lead",resp:"Strategy, Communication, Stakeholder Mgmt",tech:"Powerpoint, Pen & Paper",ref:"yes",desc_en:"Developed a Data Science strategy – vision, roadmap, use-case evaluation, Data Science team setup within the organization – including executive workshops in the German insurance and banking sectors.",desc_de:"Entwicklung einer Data-Science-Strategie – Vision, Roadmap, Use-Case-Evaluation, Data-Science-Team-Aufbau in der Organisation usw. – inklusive Executive-Workshops im deutschen Versicherungs- und Bankensektor."},
+  {num:24,from:"2020-01",to:"2020-10",months:10,industry:"Pharma",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 3 Pharmaceutical Company",country:"Germany",role:"Project lead",resp:"Implementation, Communication, Stakeholder Mgmt",tech:"Python, Kedro, Tableau, Powerpoint",ref:"yes",desc_en:"Geo-intelligence: Built a portfolio of Analytics use cases for a top 5 drug in Germany (by revenue) at a large pharma company, leveraging internal and external (IQVIA) datasets, focusing on predicting drug prescriptions across German area codes and optimizing salesforce actions to improve commercial outcomes.",desc_de:"Geo-Intelligence: Aufbau eines Portfolios von Analytics-Use-Cases für ein Top-5-Medikament in Deutschland (nach Umsatz) bei einem großen Pharmaunternehmen, unter Nutzung interner und externer (IQVIA) Datenquellen, mit Fokus auf der Vorhersage von Verschreibungen über deutsche Postleitzahlbereiche sowie Optimierung des Außendienst-Vorgehens zur Verbesserung der gewünschten Outcomes."},
+  {num:25,from:"2020-10",to:"2020-10",months:0.5,industry:"Pharma",level:"Professional",type:"Project Proposal",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 10 Pharmaceutical Company",country:"Germany",role:"Project member",resp:"Communication",tech:"Powerpoint",ref:"",desc_en:"Wrote project proposals for new Data Science engagements.",desc_de:"Verfassen von Projektvorschlägen für neue Data-Science-Engagements."},
+  {num:26,from:"2020-10",to:"2020-11",months:0.5,industry:"Retail",level:"Professional",type:"Project Proposal",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 3 Retailer",country:"Germany",role:"Project member",resp:"Communication",tech:"Powerpoint",ref:"",desc_en:"Wrote project proposals for new Data Science engagements.",desc_de:"Verfassen von Projektvorschlägen für neue Data-Science-Engagements."},
+  {num:27,from:"2020-11",to:"2021-01",months:3,industry:"Energy",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 3 Energy Company",country:"Germany",role:"Project lead",resp:"Implementation, Communication, Stakeholder Mgmt",tech:"Python, Tableau, Excel, Powerpoint",ref:"yes",desc_en:"360-degree network visibility: Led a team building 30 Tableau dashboards to better understand the end-to-end activities of a large German utilities company, including voltage, parts (including faulty ones) and maintenance schedules to optimize overall operations.",desc_de:"360-Grad-Netzwerk-Sichtbarkeit: Leitung eines Teams beim Aufbau von 30 Tableau-Dashboards zum besseren Verständnis der End-to-End-Aktivitäten eines großen deutschen Energieversorgers — inklusive Spannung, (fehlerhaften) Bauteilen und Wartungsplänen zur Optimierung des Gesamtbetriebs."},
+  {num:28,from:"2021-01",to:"2021-12",months:11,industry:"Pharma",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"McKinsey",customer:"",category:"Top 3 Pharma Wholesaler",country:"Germany",role:"Project lead",resp:"Strategy, Communication, Stakeholder Mgmt",tech:"SQL, Excel, Powerpoint",ref:"yes",desc_en:"Controlling & profit intelligence: Led the conceptualization and implementation of a complex cost breakdown to obtain EBITDA-profit numbers at transaction-level for Europe's largest pharma wholesaler. Led the team building a set of dashboards for informing more granular business decisions; this tool became a personal favorite of the organization's Chairman of the Board.",desc_de:"Controlling & Profit Intelligence: Leitung der Konzeption und Umsetzung eines komplexen Cost-Breakdowns zur Ermittlung von EBITDA-Profit-Zahlen auf Transaktionsebene für den größten Pharma-Großhändler Europas. Leitung eines Teams beim Aufbau eines Sets von Dashboards für granulare Geschäftsentscheidungen; das Tool wurde zum persönlichen Favoriten des Vorstandsvorsitzenden der Organisation."},
+  {num:29,from:"2022-01",to:"2022-11",months:11,industry:"Information Technology",level:"Professional",type:"Sales & Pre-Sales",naming:"ok to name",organization:"DataRobot",customer:"",category:"30+ German Enterprise (DAX, Mittelstand)",category_short:"30+ Enterprises",country:"Germany",role:"Account Executive & Forward-Deployed Engineer",role_short:"AE & FDE",resp:"Sales, Implementation, Communication, Stakeholder Mgmt",tech:"DataRobot AI Platform, Python",ref:"yes",desc_en:"DataRobot enterprise sales & forward-deployed engineering across DACH: combined two complementary roles into one 11-month footprint — Sales Meetings with 30+ enterprise prospects (DAX and large mid-market) and hands-on Proof-of-Value projects with their data science teams in 2–4-week sprints, building rapid prototypes on DataRobot's AI cloud platform to demonstrate measurable impact. Promoted from PreSales to Sales Rep after 3 months. Led technical sales on build vs. buy decisions, platform due diligence, and consumption- vs seat-based commercial models.",desc_de:"DataRobot Enterprise-Sales & Forward-Deployed Engineering in DACH: zwei sich ergänzende Rollen in einem 11-Monats-Engagement — Sales-Meetings mit 30+ Enterprise-Prospects (DAX und großer Mittelstand) und Hands-on-Proof-of-Value-Projekte mit deren Data-Science-Teams in 2–4-Wochen-Sprints, Aufbau schneller Prototypen auf DataRobots AI-Cloud-Plattform zur Demonstration messbaren Impacts. Nach 3 Monaten von PreSales in Sales-Rep befördert. Technische Sales-Gespräche zu Build vs. Buy, Plattform-Due-Diligence und Consumption- vs. Seat-basierten Commercial Models."},
+  {num:30,from:"2023-03",to:"2025-03",months:24,industry:"Insurance",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"QuantCo",customer:"",category:"Top 5 Insurance",country:"Germany",role:"Project lead",resp:"Communication, Stakeholder Mgmt",tech:"OpenAI GPT-4, Python, Postgres, Domino Data Lab",ref:"yes",desc_en:"AI & GenAI Efficiency Program at a top 5 German insurer: Project lead in T-role — oversight across all efficiency initiatives spanning the digital-native and traditional insurance arms, plus tech lead on two of them. Responded to a mid-engagement leadership change and top-down strategy pivot (digital native as innovator, traditional as fast follower) by redesigning the use-case priority stack and project plan from scratch without moving the original timeline — accounting for staffing constraints and tech dependencies, re-aligning stakeholders on both sides, and restarting execution within two weeks. Built central PMO and value-measurement function. Led Task Force HF1 on bill-dispatch optimization, preventing ~20,000 customer cancellations and delivering €2.5M profit impact. Sub-project lead on HF7, managing 7+ use cases including an email-prioritization solution.",desc_de:"AI- & GenAI-Effizienz-Programm bei einem Top-5-Versicherer in Deutschland: Projektleitung in T-Rolle — Oversight über alle Effizienz-Initiativen in den Digital-Native- und Traditional-Insurance-Armen, plus Tech-Lead für zwei davon. Reaktion auf mid-engagement Leadership-Wechsel und Top-Down-Strategiewende (Digital-Native als Innovator, Traditional als Fast-Follower) durch Neugestaltung des Use-Case-Prioritäten-Stacks und Projektplans von Grund auf — bei gleichbleibender ursprünglicher Timeline — unter Berücksichtigung von Staffing-Restriktionen und Tech-Abhängigkeiten, Re-Alignment der Stakeholder beider Seiten und Wiederaufnahme der Umsetzung innerhalb von zwei Wochen. Aufbau einer zentralen PMO- und Mehrwert-Mess-Funktion. Leitung Task Force HF1 zur Rechnungsversand-Optimierung — Verhinderung von ~20.000 Kundenkündigungen und Lieferung von 2,5 Mio. € Profit-Impact. Teilprojektleitung HF7, Management von 7+ Use Cases inklusive einer E-Mail-Priorisierungs-Lösung."},
+  {num:31,from:"2025-03",to:"2026-02",months:12,industry:"Insurance",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"QuantCo",customer:"",category:"Top 3 Insurance",country:"Switzerland",role:"Project lead",resp:"Communication, Stakeholder Mgmt",tech:"Claude, OpenAI GPT-4, Gemini, LangChain, LangSmith, Python",ref:"yes",desc_en:"GenAI@Underwriting at a top 3 Swiss insurer: Led the team that built and shipped the customer's first two production GenAI solutions in Underwriting — a Correspondence Assistant and a Knowledge Assistant — delivering ~CHF 1M p.a. in measurable impact. C-level exposure including direct presentation to the Head of Underwriting. Initiated and drove additional AI experiments in the underwriting unit in partnership with the business lead.",desc_de:"GenAI@Underwriting bei einem Top-3-Schweizer Versicherer: Leitung des Teams, das die ersten zwei produktiven GenAI-Lösungen des Kunden im Underwriting gebaut und ausgerollt hat — einen Correspondence Assistant und einen Knowledge Assistant — mit ~CHF 1 Mio. p.a. messbarem Impact. C-Level-Exposure inklusive direkter Präsentation vor dem Head of Underwriting. Initiierung und Treiber zusätzlicher AI-Experimente in der Underwriting-Einheit in Zusammenarbeit mit dem Business Lead."},
+  {num:32,from:"2026-03",to:"2026-05",months:3,industry:"Insurance",level:"Professional",type:"Data Science Project",naming:"keep anonymous",organization:"QuantCo",customer:"",category:"Top 5 Insurance",country:"Germany",role:"Project lead",resp:"Communication, Stakeholder Mgmt",tech:"Python, Domino Data Lab",ref:"yes",desc_en:"Application-process risk underwriting at a top 5 German insurer: Project lead with a team of three. Integrating credit-bureau scores and additional risk signals (low creditworthiness, pending dunning or insolvency proceedings) into the contract-application flow, with financial-impact modeling and corresponding process adjustments for flagged applicants.",desc_de:"Risiko-Underwriting im Antragsprozess bei einem Top-5-Versicherer in Deutschland: Projektleitung mit einem Team von drei. Integration von Auskunfteien-Scores (SCHUFA, Experian, CRIF) und weiteren Risiko-Signalen — geringe Bonität, anhängige Mahn- oder Insolvenzverfahren — in den Vertragsantragsprozess, mit Financial-Impact-Modellierung und entsprechenden Prozessanpassungen für markierte Antragsteller:innen.",to_projected:"2026-12"}
+];
+
+const INDUSTRY_COLORS = {
+  "Automotive": "#64748b",
+  "Insurance": "#3b82f6",
+  "Retail": "#ec4899",
+  "Public Sector": "#10b981",
+  "Telecommunications": "#a855f7",
+  "Information Technology": "#06b6d4",
+  "Chemicals": "#f59e0b",
+  "Mining": "#92400e",
+  "Health Insurance (public)": "#14b8a6",
+  "Consulting": "#71717a",
+  "Manufacturing": "#f97316",
+  "Health Insurance (private)": "#0891b2",
+  "Banking": "#1d4ed8",
+  "Pharma": "#d946ef",
+  "Energy": "#eab308"
+};
+
+const LIFE_PHASES = [
+  {from: "2012-01", to: "2017-01", label_en: "Studies & Internships", label_de: "Studium & Praktika", color: "rgba(180,160,120,0.11)", labelColor: "#8a7656"},
+  {from: "2017-02", to: "2022-01", label_en: "McKinsey", label_de: "McKinsey", color: "rgba(60,110,180,0.09)", labelColor: "#3b6bb5"},
+  {from: "2022-01", to: "2022-12", label_en: "DataRobot", label_de: "DataRobot", color: "rgba(140,90,200,0.10)", labelColor: "#7c3aed", centered: true},
+  {from: "2023-03", to: "2026-12", label_en: "QuantCo", label_de: "QuantCo", color: "rgba(50,150,110,0.10)", labelColor: "#2f8a5f"}
+];
+
+
+const I18N = {
+  en: {
+    projects: "Projects",
+    years_fte: "Years FTE",
+    industries: "Industries",
+    customers: "Customers",
+    countries: "Countries",
+    showing_all: (n) => `Showing all ${n} projects`,
+    showing_filtered: (f, t) => `Showing ${f} of ${t} projects`,
+    no_match: "No projects match the current filters.",
+    role: "Role",
+    type: "Type",
+    tech: "Tech",
+    responsibilities: "Responsibilities",
+    reference: "Reference",
+    reference_available: "Available on request",
+    nav_newer: (n) => `Newer (#${n}) →`,
+    nav_older: (n) => `← Older (#${n})`,
+    nav_disabled: "",
+    search_placeholder: "Search descriptions, tech, customer…"
+  },
+  de: {
+    projects: "Projekte",
+    years_fte: "Jahre FTE",
+    industries: "Branchen",
+    customers: "Kunden",
+    countries: "Länder",
+    showing_all: (n) => `Alle ${n} Projekte`,
+    showing_filtered: (f, t) => `${f} von ${t} Projekten`,
+    no_match: "Keine Projekte entsprechen den aktuellen Filtern.",
+    role: "Rolle",
+    type: "Typ",
+    tech: "Tech",
+    responsibilities: "Verantwortlichkeiten",
+    reference: "Referenz",
+    reference_available: "Auf Anfrage verfügbar",
+    nav_newer: (n) => `Neuer (#${n}) →`,
+    nav_older: (n) => `← Älter (#${n})`,
+    nav_disabled: "",
+    search_placeholder: "Beschreibungen, Tech, Kunde suchen…"
+  }
+};
+let currentLang = "en";
+function t(key, ...args) {
+  const v = I18N[currentLang][key];
+  return typeof v === "function" ? v(...args) : v;
+}
+
+function exportPDF() {
+  const lang = document.documentElement.getAttribute("lang") || "en";
+  const filename = lang === "de" ? "Jan_Lubatschowski_Projektportfolio.pdf" : "Jan_Lubatschowski_Project_Portfolio.pdf";
+  document.body.classList.add("pdf-export");
+  const opt = {
+    margin: [10, 8, 10, 8],
+    filename: filename,
+    image: { type: "jpeg", quality: 0.95 },
+    html2canvas: { scale: 2, useCORS: true, logging: false, width: 794, windowWidth: 794 },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    pagebreak: { mode: ["css", "legacy", "avoid-all"], avoid: [".card", ".timeline-wrap", ".filter-section", ".stat"] }
+  };
+  if (typeof html2pdf === "undefined") {
+    document.body.classList.remove("pdf-export");
+    alert("PDF-Bibliothek noch nicht geladen — bitte kurz warten und erneut klicken.");
+    return;
+  }
+  html2pdf().set(opt).from(document.body).save().then(() => {
+    document.body.classList.remove("pdf-export");
+  }).catch((err) => {
+    console.error(err);
+    document.body.classList.remove("pdf-export");
+  });
+}
+
+// State
+const state = {
+  search: "",
+  industries: new Set(),
+  countries: new Set(),
+  roles: new Set(),
+  techs: new Set(),
+  modalProject: null
+};
+
+// Utilities
+function toDate(s) {
+  const [y, m] = s.split("-");
+  return new Date(parseInt(y), parseInt(m) - 1, 1);
+}
+const minDate = toDate("2012-01");
+const maxDate = toDate("2026-12");
+function pctOf(d) {
+  return ((d - minDate) / (maxDate - minDate)) * 100;
+}
+function fmtDate(s) {
+  const [y, m] = s.split("-");
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return monthNames[parseInt(m) - 1] + " " + y;
+}
+function fmtMonths(m) {
+  if (m < 1) return "<1 mo";
+  if (m === 1) return "1 mo";
+  return m + " mos";
+}
+function customerLabel(p) {
+  // ok to name: show customer name (plus category if present), but only if we have a customer name
+  const cat = p.category_short || p.category;
+  if (p.naming === "ok to name" && p.customer) {
+    return p.customer + (cat ? ` (${cat})` : "");
+  }
+  // keep anonymous: only show category
+  return cat || p.industry;
+}
+function getTechList(p) {
+  if (!p.tech) return [];
+  return p.tech.split(",").map(t => t.trim()).filter(Boolean);
+}
+
+// Stats
+function renderStats() {
+  const filtered = applyFilters();
+  const totalMonths = filtered.reduce((sum, p) => sum + p.months, 0);
+  const industries = new Set(filtered.map(p => p.industry));
+  const countries = new Set(filtered.map(p => p.country));
+  const customers = new Set(filtered.filter(p => p.organization !== p.customer).map(p => p.customer));
+  document.getElementById("stats").innerHTML = `
+    <div class="stat"><div class="num">${filtered.length}</div><div class="label">${t("projects")}</div></div>
+    <div class="stat"><div class="num">${(totalMonths / 12).toFixed(1)}</div><div class="label">${t("years_fte")}</div></div>
+    <div class="stat"><div class="num">${industries.size}</div><div class="label">${t("industries")}</div></div>
+    <div class="stat"><div class="num">${customers.size}</div><div class="label">${t("customers")}</div></div>
+    <div class="stat"><div class="num">${countries.size}</div><div class="label">${t("countries")}</div></div>
+  `;
+}
+
+// Filter logic
+function applyFilters() {
+  const q = state.search.toLowerCase().trim();
+  return PROJECTS.filter(p => {
+    if (state.industries.size && !state.industries.has(p.industry)) return false;
+    if (state.countries.size && !state.countries.has(p.country)) return false;
+    if (state.roles.size && !state.roles.has(p.role)) return false;
+    if (state.techs.size) {
+      const ts = getTechList(p);
+      let any = false;
+      for (const sel of state.techs) {
+        if (ts.includes(sel)) { any = true; break; }
+      }
+      if (!any) return false;
+    }
+    if (q) {
+      const hay = ((p.desc_en || "") + " " + (p.desc_de || "") + " " + p.customer + " " + p.organization + " " + p.tech + " " + p.industry + " " + p.role + " " + (p.category || "")).toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+}
+
+// Chip rendering
+function renderChips(elId, items, set, colorMap, markFn) {
+  const el = document.getElementById(elId);
+  el.innerHTML = "";
+  items.forEach(item => {
+    const c = document.createElement("span");
+    let cls = "chip";
+    if (set.has(item)) cls += " active";
+    if (markFn && markFn(item)) cls += " llm";
+    c.className = cls;
+    if (colorMap && colorMap[item]) {
+      c.innerHTML = `<span class="dot" style="color:${colorMap[item]}"></span>${escapeHtml(item)}`;
+    } else {
+      c.textContent = item;
+    }
+    c.dataset.value = item;
+    c.onclick = () => {
+      if (set.has(item)) set.delete(item); else set.add(item);
+      render();
+    };
+    el.appendChild(c);
+  });
+}
+
+// Timeline
+function renderTimeline() {
+  const tl = document.getElementById("timeline");
+  tl.innerHTML = "";
+  // Life-phase background bands
+  LIFE_PHASES.forEach(phase => {
+    const left = pctOf(toDate(phase.from));
+    const right = pctOf(toDate(phase.to));
+    const band = document.createElement("div");
+    band.className = "tl-band";
+    band.style.left = left + "%";
+    band.style.width = (right - left) + "%";
+    band.style.background = phase.color;
+    const lbl = document.createElement("div");
+    lbl.className = "tl-band-label" + (phase.centered ? " centered" : "");
+    lbl.textContent = currentLang === "de" ? phase.label_de : phase.label_en;
+    lbl.style.color = phase.labelColor;
+    band.appendChild(lbl);
+    tl.appendChild(band);
+  });
+
+  const axis = document.createElement("div");
+  axis.className = "timeline-axis";
+  tl.appendChild(axis);
+
+  for (let y = 2012; y <= 2026; y += 2) {
+    const tick = document.createElement("div");
+    tick.className = "timeline-tick";
+    tick.style.left = pctOf(toDate(y + "-01")) + "%";
+    tick.textContent = y;
+    tl.appendChild(tick);
+  }
+
+  const filtered = new Set(applyFilters().map(p => p.num));
+  const rows = [];
+  const sorted = [...PROJECTS].sort((a, b) => toDate(a.from) - toDate(b.from));
+  sorted.forEach(p => {
+    const startD = toDate(p.from);
+    const endD = toDate(p.to);
+    const left = pctOf(startD);
+    const right = pctOf(endD);
+    const width = Math.max(right - left, 0.5);
+
+    let row = 0;
+    while (rows[row] !== undefined && rows[row] > left - 0.5) row++;
+    rows[row] = left + width;
+
+    const color = INDUSTRY_COLORS[p.industry] || "#999";
+    const cust = customerLabel(p);
+    const isDim = !filtered.has(p.num);
+    if (p.to_projected) {
+      const projEndPct = pctOf(toDate(p.to_projected));
+      const totalSpan = projEndPct - left;
+      const solidRatio = (right - left) / totalSpan * 100;
+      const group = document.createElement("div");
+      group.className = "tl-group" + (isDim ? " dim" : "");
+      group.style.left = left + "%";
+      group.style.width = totalSpan + "%";
+      group.style.bottom = (16 + row * 15) + "px";
+      group.style.height = "12px";
+      group.title = `#${p.num} · ${p.industry} · ${cust} — ${fmtDate(p.from)} → ${fmtDate(p.to)} (confirmed) · projected to ${fmtDate(p.to_projected)}`;
+      group.onclick = () => openModal(p.num);
+      const solid = document.createElement("div");
+      solid.className = "tl-bar" + (isDim ? " dim" : "");
+      solid.style.position = "absolute";
+      solid.style.left = "0";
+      solid.style.width = solidRatio + "%";
+      solid.style.height = "12px";
+      solid.style.background = color;
+      solid.style.bottom = "0";
+      group.appendChild(solid);
+      const proj = document.createElement("div");
+      proj.className = "tl-bar projected" + (isDim ? " dim" : "");
+      proj.style.position = "absolute";
+      proj.style.left = solidRatio + "%";
+      proj.style.width = (100 - solidRatio) + "%";
+      proj.style.height = "12px";
+      proj.style.borderColor = color;
+      proj.style.bottom = "0";
+      group.appendChild(proj);
+      tl.appendChild(group);
+    } else {
+      const bar = document.createElement("div");
+      bar.className = "tl-bar" + (isDim ? " dim" : "");
+      bar.style.left = left + "%";
+      bar.style.width = width + "%";
+      bar.style.bottom = (16 + row * 15) + "px";
+      bar.style.background = color;
+      bar.title = `#${p.num} · ${p.industry} · ${cust} — ${fmtDate(p.from)}${p.from !== p.to ? " → " + fmtDate(p.to) : ""}`;
+      bar.onclick = () => openModal(p.num);
+      tl.appendChild(bar);
+    }
+
+  });
+}
+
+// Project cards
+function renderProjects() {
+  const filtered = applyFilters();
+  const wrap = document.getElementById("projects");
+  const count = document.getElementById("count");
+  count.textContent = filtered.length === PROJECTS.length
+    ? t("showing_all", filtered.length)
+    : t("showing_filtered", filtered.length, PROJECTS.length);
+
+  wrap.innerHTML = "";
+  if (!filtered.length) {
+    wrap.innerHTML = `<div class="empty">${t("no_match")}</div>`;
+    return;
+  }
+  filtered.sort((a, b) => b.num - a.num);
+  filtered.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "card";
+    const color = INDUSTRY_COLORS[p.industry] || "#999";
+    const cust = customerLabel(p);
+
+    card.innerHTML = `
+      <div class="card-stripe" style="background:${color}"></div>
+      <div class="card-head">
+        <div>
+          <div class="card-num">#${String(p.num).padStart(2, "0")} · ${fmtDate(p.from)}${p.from !== p.to ? " → " + fmtDate(p.to) : ""} · ${fmtMonths(p.months)}</div>
+          <div class="card-title">${escapeHtml(p.industry)}</div>
+          <div class="card-org">${escapeHtml(cust)} · ${escapeHtml(p.country)}</div>
+        </div>
+        <span class="role-chip"><span class="dot" style="background:${color}"></span>${escapeHtml(p.role_short || p.role)}</span>
+      </div>
+      <div class="card-desc">${escapeHtml(currentLang === "de" ? (p.desc_de || p.desc_en) : p.desc_en)}</div>
+      <div class="card-print-meta">
+        <div class="row"><span class="key">Role</span><span class="val">${escapeHtml(p.role)} · ${escapeHtml(p.level)}</span></div>
+        <div class="row"><span class="key">Type</span><span class="val">${escapeHtml(p.type)}</span></div>
+        ${p.tech ? `<div class="row"><span class="key">Tech</span><span class="val">${escapeHtml(p.tech)}</span></div>` : ""}
+        ${p.resp ? `<div class="row"><span class="key">Resp.</span><span class="val">${escapeHtml(p.resp)}</span></div>` : ""}
+        ${p.ref ? `<div class="row"><span class="key">Reference</span><span class="val">Available on request</span></div>` : ""}
+      </div>
+    `;
+    card.onclick = () => openModal(p.num);
+    wrap.appendChild(card);
+  });
+}
+
+// Modal
+function openModal(num) {
+  const p = PROJECTS.find(x => x.num === num);
+  if (!p) return;
+  state.modalProject = num;
+  renderModal();
+  document.getElementById("backdrop").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeModal() {
+  document.getElementById("backdrop").classList.remove("open");
+  state.modalProject = null;
+  document.body.style.overflow = "";
+}
+function renderModal() {
+  const p = PROJECTS.find(x => x.num === state.modalProject);
+  if (!p) return;
+  const color = INDUSTRY_COLORS[p.industry] || "#999";
+  const cust = customerLabel(p);
+
+  document.getElementById("modal-stripe").style.background = color;
+  const filtered = applyFilters();
+  const idx = filtered.findIndex(x => x.num === p.num);
+  // Find prev/next in the full project list (sorted by num desc, like the grid)
+  const sorted = [...filtered].sort((a, b) => b.num - a.num);
+  const sortedIdx = sorted.findIndex(x => x.num === p.num);
+  const prev = sortedIdx > 0 ? sorted[sortedIdx - 1] : null;
+  const next = sortedIdx < sorted.length - 1 ? sorted[sortedIdx + 1] : null;
+
+  document.getElementById("modal-body").innerHTML = `
+    <div class="modal-meta">#${String(p.num).padStart(2, "0")} · ${fmtDate(p.from)}${p.from !== p.to ? " → " + fmtDate(p.to) : ""} · ${fmtMonths(p.months)} · ${escapeHtml(p.country)}</div>
+    <div class="modal-title">${escapeHtml(p.industry)}</div>
+    <div class="modal-sub">${escapeHtml(cust)} · ${escapeHtml(p.organization)}</div>
+    <div class="modal-desc">${escapeHtml(currentLang === "de" ? (p.desc_de || p.desc_en) : p.desc_en)}</div>
+    <div class="modal-details">
+      <div class="key">${t("role")}</div><div class="val">${escapeHtml(p.role)} · ${escapeHtml(p.level)}</div>
+      <div class="key">${t("type")}</div><div class="val">${escapeHtml(p.type)}</div>
+      ${p.tech ? `<div class="key">${t("tech")}</div><div class="val">${escapeHtml(p.tech)}</div>` : ""}
+      ${p.resp ? `<div class="key">${t("responsibilities")}</div><div class="val">${escapeHtml(p.resp)}</div>` : ""}
+      ${p.ref ? `<div class="key">${t("reference")}</div><div class="val">${t("reference_available")}</div>` : ""}
+    </div>
+    <div class="modal-nav">
+      <button class="nav-btn" id="modal-next" ${next ? "" : "disabled"}>${next ? t("nav_older", next.num) : t("nav_older", "")}</button>
+      <button class="nav-btn" id="modal-prev" ${prev ? "" : "disabled"}>${prev ? t("nav_newer", prev.num) : t("nav_newer", "")}</button>
+    </div>
+  `;
+  if (prev) document.getElementById("modal-prev").onclick = () => openModal(prev.num);
+  if (next) document.getElementById("modal-next").onclick = () => openModal(next.num);
+}
+
+function escapeHtml(s) {
+  if (s === null || s === undefined) return "";
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+// Master render
+function render() {
+  renderStats();
+  renderTimeline();
+  renderProjects();
+  // Re-render chip-active states
+  document.querySelectorAll("#chips-industry .chip").forEach(c => c.classList.toggle("active", state.industries.has(c.dataset.value)));
+  document.querySelectorAll("#chips-country .chip").forEach(c => c.classList.toggle("active", state.countries.has(c.dataset.value)));
+  document.querySelectorAll("#chips-role .chip").forEach(c => c.classList.toggle("active", state.roles.has(c.dataset.value)));
+  document.querySelectorAll("#chips-tech .chip").forEach(c => c.classList.toggle("active", state.techs.has(c.dataset.value)));
+  if (state.modalProject !== null) renderModal();
+}
+
+// Init
+function init() {
+  const industries = [...new Set(PROJECTS.map(p => p.industry))].sort();
+
+  // Country order: Germany first, then DACH, then EU, then rest
+  const COUNTRY_ORDER = ["Germany", "Switzerland", "Belgium", "United States"];
+  const countries = [...new Set(PROJECTS.map(p => p.country))].sort((a, b) => {
+    const ia = COUNTRY_ORDER.indexOf(a);
+    const ib = COUNTRY_ORDER.indexOf(b);
+    if (ia >= 0 && ib >= 0) return ia - ib;
+    if (ia >= 0) return -1;
+    if (ib >= 0) return 1;
+    return a.localeCompare(b);
+  });
+
+  // Roles: most common first, unique outliers (e.g. DataRobot AE/FDE) at the end
+  const roleFreq = {};
+  PROJECTS.forEach(p => { roleFreq[p.role] = (roleFreq[p.role] || 0) + 1; });
+  const roles = [...new Set(PROJECTS.map(p => p.role))].sort((a, b) => {
+    const diff = (roleFreq[b] || 0) - (roleFreq[a] || 0);
+    if (diff !== 0) return diff;
+    return a.localeCompare(b);
+  });
+
+  // Tech ordering: LLM first, then preferred core stack, then others by frequency, then non-tech last
+  const LLM_TECH = new Set(["Claude", "OpenAI GPT-4", "Gemini", "LangChain", "LangSmith"]);
+  const PREFERRED_TECH = ["Python", "R", "Excel", "SQL", "Tableau"];
+  const NON_TECH = ["Powerpoint", "Visio", "Pen & Paper"];
+  const techFreq = {};
+  const allTech = new Set();
+  PROJECTS.forEach(p => getTechList(p).forEach(t => {
+    allTech.add(t);
+    techFreq[t] = (techFreq[t] || 0) + 1;
+  }));
+  const techs = [...allTech].sort((a, b) => {
+    const groupA = LLM_TECH.has(a) ? 0 : PREFERRED_TECH.indexOf(a) >= 0 ? 1 : NON_TECH.indexOf(a) >= 0 ? 3 : 2;
+    const groupB = LLM_TECH.has(b) ? 0 : PREFERRED_TECH.indexOf(b) >= 0 ? 1 : NON_TECH.indexOf(b) >= 0 ? 3 : 2;
+    if (groupA !== groupB) return groupA - groupB;
+    if (groupA === 0) return a.localeCompare(b); // LLM: alpha
+    if (groupA === 1) return PREFERRED_TECH.indexOf(a) - PREFERRED_TECH.indexOf(b); // preferred: fixed order
+    if (groupA === 3) return NON_TECH.indexOf(a) - NON_TECH.indexOf(b); // non-tech: fixed order
+    // group 2: frequency desc, then alpha
+    const freqDiff = (techFreq[b] || 0) - (techFreq[a] || 0);
+    if (freqDiff !== 0) return freqDiff;
+    return a.localeCompare(b);
+  });
+
+  renderChips("chips-industry", industries, state.industries, INDUSTRY_COLORS);
+  renderChips("chips-country", countries, state.countries);
+  renderChips("chips-role", roles, state.roles);
+  renderChips("chips-tech", techs, state.techs, null, t => LLM_TECH.has(t));
+
+  document.getElementById("search").addEventListener("input", e => {
+    state.search = e.target.value;
+    render();
+  });
+  document.getElementById("reset").addEventListener("click", () => {
+    state.search = "";
+    state.industries.clear();
+    state.countries.clear();
+    state.roles.clear();
+    state.techs.clear();
+    document.getElementById("search").value = "";
+    render();
+  });
+
+  // Modal close handlers
+  document.getElementById("modal-close").onclick = closeModal;
+  document.getElementById("backdrop").addEventListener("click", e => {
+    if (e.target.id === "backdrop") closeModal();
+  });
+  document.addEventListener("keydown", e => {
+    if (state.modalProject === null) return;
+    if (e.key === "Escape") closeModal();
+    else if (e.key === "ArrowLeft") {
+      const btn = document.getElementById("modal-next");
+      if (btn && !btn.disabled) btn.click();
+    } else if (e.key === "ArrowRight") {
+      const btn = document.getElementById("modal-prev");
+      if (btn && !btn.disabled) btn.click();
+    }
+  });
+
+  render();
+}
+
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.setAttribute("lang", lang);
+  document.getElementById("lang-en").classList.toggle("active", lang === "en");
+  document.getElementById("lang-de").classList.toggle("active", lang === "de");
+  document.getElementById("search").placeholder = t("search_placeholder");
+  try { localStorage.setItem("siteLang", lang); } catch (e) {}
+  render();
+}
+document.getElementById("lang-en").addEventListener("click", () => setLang("en"));
+document.getElementById("lang-de").addEventListener("click", () => setLang("de"));
+
+// Init language
+let initialLang = "en";
+try {
+  const stored = localStorage.getItem("siteLang");
+  if (stored === "en" || stored === "de") initialLang = stored;
+} catch (e) {}
+currentLang = initialLang;
+document.documentElement.setAttribute("lang", initialLang);
+document.getElementById("lang-en").classList.toggle("active", initialLang === "en");
+document.getElementById("lang-de").classList.toggle("active", initialLang === "de");
+
+init();
+document.getElementById("search").placeholder = t("search_placeholder");
+</script>
+
+</body>
+</html>

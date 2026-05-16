@@ -1315,12 +1315,14 @@ function init() {
     return a.localeCompare(b);
   });
 
-  // Types: sort by frequency, then alpha
-  const typeFreq = {};
-  PROJECTS.forEach(p => { typeFreq[p.type] = (typeFreq[p.type] || 0) + 1; });
+  // Types: custom order
+  const TYPE_ORDER = ["Data/AI Project", "IT Project", "Project Proposal", "Sales & Pre-Sales"];
   const types = [...new Set(PROJECTS.map(p => p.type))].sort((a, b) => {
-    const diff = (typeFreq[b] || 0) - (typeFreq[a] || 0);
-    if (diff !== 0) return diff;
+    const ia = TYPE_ORDER.indexOf(a);
+    const ib = TYPE_ORDER.indexOf(b);
+    if (ia >= 0 && ib >= 0) return ia - ib;
+    if (ia >= 0) return -1;
+    if (ib >= 0) return 1;
     return a.localeCompare(b);
   });
 

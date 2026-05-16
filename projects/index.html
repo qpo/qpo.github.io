@@ -808,6 +808,14 @@
   <span class="chips" id="chips-role"></span>
 </div>
 <div class="filter-section">
+  <span class="filter-label"><span data-only-en>Type</span><span data-only-de>Typ</span></span>
+  <span class="chips" id="chips-type"></span>
+</div>
+<div class="filter-section">
+  <span class="filter-label"><span data-only-en>Organization</span><span data-only-de>Arbeitgeber</span></span>
+  <span class="chips" id="chips-organization"></span>
+</div>
+<div class="filter-section">
   <span class="filter-label"><span data-only-en>Tech</span><span data-only-de>Tech</span></span>
   <span class="chips" id="chips-tech"></span>
 </div>
@@ -930,6 +938,8 @@ const state = {
   industries: new Set(),
   countries: new Set(),
   roles: new Set(),
+  types: new Set(),
+  organizations: new Set(),
   techs: new Set(),
   modalProject: null
 };
@@ -991,6 +1001,8 @@ function applyFilters() {
     if (state.industries.size && !state.industries.has(p.industry)) return false;
     if (state.countries.size && !state.countries.has(p.country)) return false;
     if (state.roles.size && !state.roles.has(p.role)) return false;
+    if (state.types.size && !state.types.has(p.type)) return false;
+    if (state.organizations.size && !state.organizations.has(p.organization)) return false;
     if (state.techs.size) {
       const ts = getTechList(p);
       let any = false;
@@ -1251,6 +1263,8 @@ function render() {
   document.querySelectorAll("#chips-industry .chip").forEach(c => c.classList.toggle("active", state.industries.has(c.dataset.value)));
   document.querySelectorAll("#chips-country .chip").forEach(c => c.classList.toggle("active", state.countries.has(c.dataset.value)));
   document.querySelectorAll("#chips-role .chip").forEach(c => c.classList.toggle("active", state.roles.has(c.dataset.value)));
+  document.querySelectorAll("#chips-type .chip").forEach(c => c.classList.toggle("active", state.types.has(c.dataset.value)));
+  document.querySelectorAll("#chips-organization .chip").forEach(c => c.classList.toggle("active", state.organizations.has(c.dataset.value)));
   document.querySelectorAll("#chips-tech .chip").forEach(c => c.classList.toggle("active", state.techs.has(c.dataset.value)));
   if (state.modalProject !== null) renderModal();
 }
@@ -1302,9 +1316,29 @@ function init() {
     return a.localeCompare(b);
   });
 
+  // Types: sort by frequency, then alpha
+  const typeFreq = {};
+  PROJECTS.forEach(p => { typeFreq[p.type] = (typeFreq[p.type] || 0) + 1; });
+  const types = [...new Set(PROJECTS.map(p => p.type))].sort((a, b) => {
+    const diff = (typeFreq[b] || 0) - (typeFreq[a] || 0);
+    if (diff !== 0) return diff;
+    return a.localeCompare(b);
+  });
+
+  // Organizations: sort by frequency, then alpha
+  const orgFreq = {};
+  PROJECTS.forEach(p => { orgFreq[p.organization] = (orgFreq[p.organization] || 0) + 1; });
+  const organizations = [...new Set(PROJECTS.map(p => p.organization))].sort((a, b) => {
+    const diff = (orgFreq[b] || 0) - (orgFreq[a] || 0);
+    if (diff !== 0) return diff;
+    return a.localeCompare(b);
+  });
+
   renderChips("chips-industry", industries, state.industries, INDUSTRY_COLORS);
   renderChips("chips-country", countries, state.countries);
   renderChips("chips-role", roles, state.roles);
+  renderChips("chips-type", types, state.types);
+  renderChips("chips-organization", organizations, state.organizations);
   renderChips("chips-tech", techs, state.techs, null, t => LLM_TECH.has(t));
 
   document.getElementById("search").addEventListener("input", e => {
@@ -1316,6 +1350,8 @@ function init() {
     state.industries.clear();
     state.countries.clear();
     state.roles.clear();
+    state.types.clear();
+    state.organizations.clear();
     state.techs.clear();
     document.getElementById("search").value = "";
     render();

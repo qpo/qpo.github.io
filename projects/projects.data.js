@@ -79,8 +79,8 @@ const PROJECTS = [
     "resp": "Implementation, Communication, Stakeholder Mgmt",
     "tech": "R, Powerpoint",
     "ref": "",
-    "desc_en": "Predicted retail value of diamonds based on properties such as color, weight, purity.",
-    "desc_de": "Vorhersage des Einzelhandelswerts von Diamanten basierend auf Eigenschaften wie Farbe, Gewicht und Reinheit."
+    "desc_en": "Predicted retail value of diamonds (using linear regression) based on properties such as color, weight, purity.",
+    "desc_de": "Vorhersage des Einzelhandelswerts von Diamanten (mittels linearer Regression) basierend auf Eigenschaften wie Farbe, Gewicht und Reinheit."
   },
   {
     "num": 5,
@@ -119,8 +119,8 @@ const PROJECTS = [
     "resp": "Implementation, Communication, Stakeholder Mgmt",
     "tech": "R, D3, Powerpoint",
     "ref": "",
-    "desc_en": "\"The Power of Parks\": Built statistical models explaining the effect of the US' largest public park system on nearby property values. Predicted demand for public activity programs. Ran sentiment analysis on structured and unstructured data from 10,000+ survey responses.",
-    "desc_de": "„The Power of Parks\": Statistische Modelle zur Erklärung des Effekts des größten US-Park-Systems auf umliegende Immobilienwerte. Vorhersage der Nachfrage nach öffentlichen Aktivitätsprogrammen. Sentiment-Analyse auf strukturierten und unstrukturierten Daten aus 10.000+ Umfrageantworten."
+    "desc_en": "\"The Power of Parks\": Built statistical models (random forests, boosted trees, neural networks) explaining the effect of the US' largest public park system on nearby property values. Predicted demand for public activity programs. Ran sentiment analysis on structured and unstructured data from 10,000+ survey responses.",
+    "desc_de": "„The Power of Parks\": Statistische Modelle (Random Forests, Boosted Trees, neuronale Netze) zur Erklärung des Effekts des größten US-Park-Systems auf umliegende Immobilienwerte. Vorhersage der Nachfrage nach öffentlichen Aktivitätsprogrammen. Sentiment-Analyse auf strukturierten und unstrukturierten Daten aus 10.000+ Umfrageantworten."
   },
   {
     "num": 7,
@@ -139,8 +139,8 @@ const PROJECTS = [
     "resp": "Implementation, Communication, Stakeholder Mgmt",
     "tech": "R, Powerpoint",
     "ref": "",
-    "desc_en": "\"Cord cutters\": Predicted churn likelihood of cable TV subscribers based on set-top box activity data.",
-    "desc_de": "„Cord cutters\": Vorhersage der Churn-Wahrscheinlichkeit von Kabel-TV-Abonnent:innen anhand von Set-Top-Box-Aktivitätsdaten."
+    "desc_en": "\"Cord cutters\": Predicted churn likelihood of cable TV subscribers (using random forests, boosted trees and ensemble methods) based on set-top box activity data.",
+    "desc_de": "„Cord cutters\": Vorhersage der Churn-Wahrscheinlichkeit von Kabel-TV-Abonnent:innen (mittels Random Forests, Boosted Trees und Ensemble-Methoden) anhand von Set-Top-Box-Aktivitätsdaten."
   },
   {
     "num": 8,
@@ -159,8 +159,8 @@ const PROJECTS = [
     "resp": "Implementation, Communication, Stakeholder Mgmt",
     "tech": "R, Powerpoint",
     "ref": "yes",
-    "desc_en": "Built a model explaining migration flows in African countries, linking census data and a dataset on violent outbreaks.",
-    "desc_de": "Modell zur Erklärung von Migrationsströmen in afrikanischen Ländern, basierend auf der Verknüpfung von Zensus-Daten und einem Datensatz zu gewaltsamen Ausbrüchen."
+    "desc_en": "Built a model (using an ensemble of random forests, boosted trees and neural networks) explaining migration flows in African countries, linking census data and a dataset on violent outbreaks.",
+    "desc_de": "Modell (Ensemble aus Random Forests, Boosted Trees und neuronalen Netzen) zur Erklärung von Migrationsströmen in afrikanischen Ländern, basierend auf der Verknüpfung von Zensus-Daten und einem Datensatz zu gewaltsamen Ausbrüchen."
   },
   {
     "num": 9,
@@ -179,8 +179,8 @@ const PROJECTS = [
     "resp": "Implementation, Communication, Stakeholder Mgmt",
     "tech": "R, Powerpoint",
     "ref": "",
-    "desc_en": "Predicted true location of highway construction zones based on vehicle navigation data in collaboration with the customer, using descriptive and predictive analytics. Led a team of five students through all project stages from obtaining data to final presentation and write-up of a white paper.",
-    "desc_de": "Vorhersage der tatsächlichen Position von Autobahn-Baustellen anhand von Fahrzeug-Navigationsdaten in Zusammenarbeit mit dem Kunden, mittels deskriptiver und prädiktiver Analytik. Führung eines fünfköpfigen Studententeams durch alle Projektphasen — von der Datenbeschaffung bis zur Abschlusspräsentation und zum White Paper."
+    "desc_en": "Predicted true location of highway construction zones based on vehicle navigation data in collaboration with the customer, using descriptive and predictive analytics (boosted trees, random forests, deep neural networks, ensemble methods). Led a team of five students through all project stages from obtaining data to final presentation and write-up of a white paper.",
+    "desc_de": "Vorhersage der tatsächlichen Position von Autobahn-Baustellen anhand von Fahrzeug-Navigationsdaten in Zusammenarbeit mit dem Kunden, mittels deskriptiver und prädiktiver Analytik (Boosted Trees, Random Forests, Deep Neural Networks, Ensemble-Methoden). Führung eines fünfköpfigen Studententeams durch alle Projektphasen — von der Datenbeschaffung bis zur Abschlusspräsentation und zum White Paper."
   },
   {
     "num": 10,
@@ -219,8 +219,8 @@ const PROJECTS = [
     "resp": "Implementation, Communication",
     "tech": "VBA, Gurobi Solver, Excel",
     "ref": "",
-    "desc_en": "Built and implemented a production-planning optimization tool for reducing waste and maximizing output of a Western European mine with about 200 workers and 50 machines permanently on-site.",
-    "desc_de": "Aufbau und Einführung eines Produktionsplanungs-Optimierungstools zur Reduzierung von Ausschuss und Maximierung des Outputs einer westeuropäischen Mine mit rund 200 Mitarbeitenden und 50 fest stationierten Maschinen."
+    "desc_en": "Built and implemented a production-planning optimization tool for reducing waste and maximizing output of a Western European mine with about 200 workers and 50 machines permanently on-site. Delivered dedicated data/analytics enablement sessions for non-technical customer stakeholders.",
+    "desc_de": "Aufbau und Einführung eines Produktionsplanungs-Optimierungstools zur Reduzierung von Ausschuss und Maximierung des Outputs einer westeuropäischen Mine mit rund 200 Mitarbeitenden und 50 fest stationierten Maschinen. Durchführung dedizierter Data-/Analytics-Enablement-Sessions für nicht-technische Stakeholder beim Kunden."
   },
   {
     "num": 12,
@@ -239,8 +239,8 @@ const PROJECTS = [
     "resp": "Strategy, Implementation, Communication, Stakeholder Mgmt",
     "tech": "R, Excel, Powerpoint",
     "ref": "yes",
-    "desc_en": "New-business buildout for a digital insurance subsidiary of a large German insurance group. Developed the analytics strategy and implemented novel, analytics-based pricing mechanisms for individual insurance products.",
-    "desc_de": "Neugeschäftsaufbau für ein digitales Versicherungsunternehmen einer großen deutschen Versicherungsgruppe. Entwicklung der Analytics-Strategie. Einführung neuartiger, analytics-basierter Pricing-Mechanismen für einzelne Versicherungsprodukte."
+    "desc_en": "New-business buildout for a digital insurance subsidiary of a large German insurance group. Developed the analytics strategy and implemented novel, analytics-based pricing mechanisms for individual insurance products. Created innovative approach for market-based pricing, taking into account competitor price data from comparison websites.",
+    "desc_de": "Neugeschäftsaufbau für ein digitales Versicherungsunternehmen einer großen deutschen Versicherungsgruppe. Entwicklung der Analytics-Strategie. Einführung neuartiger, analytics-basierter Pricing-Mechanismen für einzelne Versicherungsprodukte. Entwicklung eines innovativen Ansatzes für marktbasiertes Pricing unter Berücksichtigung von Wettbewerberpreisen aus Vergleichsportalen."
   },
   {
     "num": 13,
@@ -259,8 +259,8 @@ const PROJECTS = [
     "resp": "Implementation, Communication",
     "tech": "R, Excel, Powerpoint",
     "ref": "yes",
-    "desc_en": "Predicted churn likelihood of mobile phone customers based on demographics and activity data. Built and executed a tiered marketing response management tool for reducing actual churn, based on predicted reasons for customers with high churn probability.",
-    "desc_de": "Vorhersage der Churn-Wahrscheinlichkeit von Mobilfunkkund:innen anhand von Demografie- und Aktivitätsdaten. Aufbau und Einführung eines gestaffelten Marketing-Response-Tools zur Reduzierung tatsächlichen Churns, basierend auf vorhergesagten Churn-Gründen bei Kund:innen mit hoher Abwanderungswahrscheinlichkeit."
+    "desc_en": "Predicted churn likelihood of mobile phone customers (ensemble methods) based on demographics and activity data. Built and executed a tiered marketing response management tool for reducing actual churn, based on predicted reasons for customers with high churn probability. Delivered dedicated data/analytics enablement sessions for non-technical customer stakeholders.",
+    "desc_de": "Vorhersage der Churn-Wahrscheinlichkeit von Mobilfunkkund:innen (Ensemble-Methoden) anhand von Demografie- und Aktivitätsdaten. Aufbau und Einführung eines gestaffelten Marketing-Response-Tools zur Reduzierung tatsächlichen Churns, basierend auf vorhergesagten Churn-Gründen bei Kund:innen mit hoher Abwanderungswahrscheinlichkeit. Durchführung dedizierter Data-/Analytics-Enablement-Sessions für nicht-technische Stakeholder beim Kunden."
   },
   {
     "num": 14,
@@ -279,8 +279,8 @@ const PROJECTS = [
     "resp": "Implementation, Communication",
     "tech": "R, Excel, Powerpoint",
     "ref": "yes",
-    "desc_en": "Developed models for predicting claims fraud from 800,000 yearly invoices. Built a decision engine on top of the predictive model to prioritize claimants for follow-up interventions.",
-    "desc_de": "Entwicklung von Modellen zur Vorhersage von Versicherungsbetrug aus 800.000 jährlichen Rechnungen. Aufbau einer Decision-Engine auf Basis des Vorhersagemodells zur Priorisierung von Anspruchstellenden für Folge-Interventionen."
+    "desc_en": "Developed models for predicting claims fraud from 800,000 yearly invoices (using boosted trees). Built a decision engine on top of the predictive model to prioritize claimants for follow-up interventions. Delivered dedicated data/analytics enablement sessions for non-technical customer stakeholders.",
+    "desc_de": "Entwicklung von Modellen zur Vorhersage von Versicherungsbetrug aus 800.000 jährlichen Rechnungen (mittels Boosted Trees). Aufbau einer Decision-Engine auf Basis des Vorhersagemodells zur Priorisierung von Anspruchstellenden für Folge-Interventionen. Durchführung dedizierter Data-/Analytics-Enablement-Sessions für nicht-technische Stakeholder beim Kunden."
   },
   {
     "num": 15,
@@ -299,8 +299,8 @@ const PROJECTS = [
     "resp": "Implementation, Communication, Stakeholder Mgmt",
     "tech": "R, Powerpoint, Pen & Paper",
     "ref": "yes",
-    "desc_en": "Conceptualized, implemented and organized Europe-wide Data Science training sessions for consultants.",
-    "desc_de": "Konzeption, Umsetzung und Organisation europaweiter Data-Science-Trainings für Berater:innen."
+    "desc_en": "Conceptualized, implemented and organized Europe-wide Data Science training sessions for consultants; instructed several sessions myself as a data scientist.",
+    "desc_de": "Konzeption, Umsetzung und Organisation europaweiter Data-Science-Trainings für Berater:innen; mehrere Sessions selbst als Data Scientist gehalten."
   },
   {
     "num": 16,
@@ -339,8 +339,8 @@ const PROJECTS = [
     "resp": "Implementation, Communication, Stakeholder Mgmt",
     "tech": "R, Powerpoint, Pen & Paper",
     "ref": "yes",
-    "desc_en": "Conceptualized, implemented and organized Europe-wide Data Science training sessions for consultants.",
-    "desc_de": "Konzeption, Umsetzung und Organisation europaweiter Data-Science-Trainings für Berater:innen."
+    "desc_en": "Conceptualized, implemented and organized Europe-wide Data Science training sessions for consultants; instructed several sessions myself as a data scientist.",
+    "desc_de": "Konzeption, Umsetzung und Organisation europaweiter Data-Science-Trainings für Berater:innen; mehrere Sessions selbst als Data Scientist gehalten."
   },
   {
     "num": 18,
@@ -379,8 +379,8 @@ const PROJECTS = [
     "resp": "Implementation, Communication",
     "tech": "R, Alteryx, Excel, Powerpoint",
     "ref": "yes",
-    "desc_en": "Claims analysis: Developed descriptive and predictive analyses to assess and optimize the claims process for a given healthcare category , improving effectiveness and reducing fraud.",
-    "desc_de": "Claims-Analyse: Entwicklung deskriptiver und prädiktiver Analysen zur Bewertung und Optimierung des Schadenbearbeitungsprozesses für eine bestimmte Healthcare-Kategorie, mit dem Ziel höherer Effektivität und reduzierten Betrugs."
+    "desc_en": "Claims analysis: Developed descriptive and predictive analyses (boosted trees) to assess and optimize the claims process for a given healthcare category , improving effectiveness and reducing fraud.",
+    "desc_de": "Claims-Analyse: Entwicklung deskriptiver und prädiktiver Analysen (Boosted Trees) zur Bewertung und Optimierung des Schadenbearbeitungsprozesses für eine bestimmte Healthcare-Kategorie, mit dem Ziel höherer Effektivität und reduzierten Betrugs."
   },
   {
     "num": 20,
@@ -399,8 +399,8 @@ const PROJECTS = [
     "resp": "Implementation, Communication, Stakeholder Mgmt",
     "tech": "R, Python, Tableau, Excel, Powerpoint",
     "ref": "yes",
-    "desc_en": "Developed descriptive dashboards and predictive solutions for understanding unmet customer needs as part of a large Customer-Experience Transformation. Conceptualized a new set of feedback forms and built hierarchical predictive models that minimize question count while preserving insight quality and actionability.",
-    "desc_de": "Entwicklung deskriptiver Dashboards und prädiktiver Lösungen zum Verständnis unerfüllter Kundenbedürfnisse im Rahmen einer großen Customer-Experience-Transformation. Konzeption und Entwicklung eines neuen Sets von Feedback-Fragebögen sowie hierarchischer Vorhersagemodelle zum Verständnis von Zusammenhängen — mit dem Ziel, die Fragebogenlänge zu minimieren bei gleichbleibender Insight-Qualität und Handlungsableitung."
+    "desc_en": "Developed descriptive dashboards and predictive solutions for understanding unmet customer needs as part of a large Customer-Experience Transformation. Conceptualized a new set of feedback forms and built hierarchical predictive models that minimize question count while preserving insight quality and actionability, utilizing feature impact methods.",
+    "desc_de": "Entwicklung deskriptiver Dashboards und prädiktiver Lösungen zum Verständnis unerfüllter Kundenbedürfnisse im Rahmen einer großen Customer-Experience-Transformation. Konzeption und Entwicklung eines neuen Sets von Feedback-Fragebögen sowie hierarchischer Vorhersagemodelle zum Verständnis von Zusammenhängen — mit dem Ziel, die Fragebogenlänge zu minimieren bei gleichbleibender Insight-Qualität und Handlungsableitung, unter Einsatz von Feature-Impact-Methoden."
   },
   {
     "num": 21,
@@ -419,8 +419,8 @@ const PROJECTS = [
     "resp": "Communication",
     "tech": "Powerpoint",
     "ref": "yes",
-    "desc_en": "Wrote project proposals for new Data Science engagements.",
-    "desc_de": "Verfassen von Projektvorschlägen für neue Data-Science-Engagements."
+    "desc_en": "Wrote project proposals for new Data Science engagements. Delivered dedicated data/analytics enablement sessions for non-technical customer stakeholders.",
+    "desc_de": "Verfassen von Projektvorschlägen für neue Data-Science-Engagements. Durchführung dedizierter Data-/Analytics-Enablement-Sessions für nicht-technische Stakeholder beim Kunden."
   },
   {
     "num": 22,
@@ -479,8 +479,8 @@ const PROJECTS = [
     "resp": "Implementation, Communication, Stakeholder Mgmt",
     "tech": "Python, Kedro, Tableau, Powerpoint",
     "ref": "yes",
-    "desc_en": "Geo-intelligence: Built a portfolio of Analytics use cases for a top 5 drug in Germany (by revenue) at a large pharma company, leveraging internal and external (IQVIA) datasets, focusing on predicting drug prescriptions across German area codes and optimizing salesforce actions to improve commercial outcomes.",
-    "desc_de": "Geo-Intelligence: Aufbau eines Portfolios von Analytics-Use-Cases für ein Top-5-Medikament in Deutschland (nach Umsatz) bei einem großen Pharmaunternehmen, unter Nutzung interner und externer (IQVIA) Datenquellen, mit Fokus auf der Vorhersage von Verschreibungen über deutsche Postleitzahlbereiche sowie Optimierung des Außendienst-Vorgehens zur Verbesserung der gewünschten Outcomes."
+    "desc_en": "Geo-intelligence: Built a portfolio of Analytics use cases for a top 5 drug in Germany (by revenue) at a large pharma company, leveraging internal and external (IQVIA) datasets, focusing on predicting drug prescriptions across German area codes and optimizing salesforce actions to improve commercial outcomes. Applied pharma-specific modelling methodologies ('brick-breaking').",
+    "desc_de": "Geo-Intelligence: Aufbau eines Portfolios von Analytics-Use-Cases für ein Top-5-Medikament in Deutschland (nach Umsatz) bei einem großen Pharmaunternehmen, unter Nutzung interner und externer (IQVIA) Datenquellen, mit Fokus auf der Vorhersage von Verschreibungen über deutsche Postleitzahlbereiche sowie Optimierung des Außendienst-Vorgehens zur Verbesserung der gewünschten Outcomes. Einsatz pharmaspezifischer Modellierungs-Methoden ('Brick-Breaking')."
   },
   {
     "num": 25,
@@ -559,8 +559,8 @@ const PROJECTS = [
     "resp": "Strategy, Communication, Stakeholder Mgmt",
     "tech": "SQL, Excel, Powerpoint",
     "ref": "yes",
-    "desc_en": "Controlling & profit intelligence: Led the conceptualization and implementation of a complex cost breakdown to obtain EBITDA-profit numbers at transaction-level for Europe's largest pharma wholesaler. Led the team building a set of dashboards for informing more granular business decisions; this tool became a personal favorite of the organization's Chairman of the Board.",
-    "desc_de": "Controlling & Profit Intelligence: Leitung der Konzeption und Umsetzung eines komplexen Cost-Breakdowns zur Ermittlung von EBITDA-Profit-Zahlen auf Transaktionsebene für den größten Pharma-Großhändler Europas. Leitung eines Teams beim Aufbau eines Sets von Dashboards für granulare Geschäftsentscheidungen; das Tool wurde zum persönlichen Favoriten des Vorstandsvorsitzenden der Organisation."
+    "desc_en": "Controlling & profit intelligence: Led the conceptualization and implementation of a complex cost breakdown to obtain EBITDA-profit numbers at transaction-level for Europe's largest pharma wholesaler. Applied to 750+ billion lines of item-level transactions. Led the team building a set of dashboards for informing more granular business decisions; this tool became a personal favorite of the organization's Chairman of the Board.",
+    "desc_de": "Controlling & Profit Intelligence: Leitung der Konzeption und Umsetzung eines komplexen Cost-Breakdowns zur Ermittlung von EBITDA-Profit-Zahlen auf Transaktionsebene für den größten Pharma-Großhändler Europas. Angewendet auf 750+ Milliarden Item-Level-Transaktionszeilen. Leitung eines Teams beim Aufbau eines Sets von Dashboards für granulare Geschäftsentscheidungen; das Tool wurde zum persönlichen Favoriten des Vorstandsvorsitzenden der Organisation."
   },
   {
     "num": 29,
@@ -581,8 +581,8 @@ const PROJECTS = [
     "resp": "Sales, Implementation, Communication, Stakeholder Mgmt",
     "tech": "DataRobot AI Platform, Python",
     "ref": "yes",
-    "desc_en": "DataRobot enterprise sales & forward-deployed engineering across DACH: combined two complementary roles into one 11-month footprint — Sales Meetings with 30+ enterprise prospects (DAX and large mid-market) and hands-on Proof-of-Value projects with their data science teams in 2–4-week sprints, building rapid prototypes on DataRobot's AI cloud platform to demonstrate measurable impact. Promoted from PreSales to Sales Rep after 3 months. Led technical sales on build vs. buy decisions, platform due diligence, and consumption- vs seat-based commercial models.",
-    "desc_de": "DataRobot Enterprise-Sales & Forward-Deployed Engineering in DACH: zwei sich ergänzende Rollen in einem 11-Monats-Engagement — Sales-Meetings mit 30+ Enterprise-Prospects (DAX und großer Mittelstand) und Hands-on-Proof-of-Value-Projekte mit deren Data-Science-Teams in 2–4-Wochen-Sprints, Aufbau schneller Prototypen auf DataRobots AI-Cloud-Plattform zur Demonstration messbaren Impacts. Nach 3 Monaten von PreSales in Sales-Rep befördert. Technische Sales-Gespräche zu Build vs. Buy, Plattform-Due-Diligence und Consumption- vs. Seat-basierten Commercial Models."
+    "desc_en": "DataRobot enterprise sales & forward-deployed engineering across DACH: combined two complementary roles into one 11-month footprint — Sales Meetings with 30+ enterprise prospects (DAX and large mid-market) and hands-on Proof-of-Value projects with their data science teams in 2–4-week sprints, building rapid prototypes on DataRobot's AI cloud platform to demonstrate measurable impact. Promoted from PreSales to Sales Rep after 3 months. Led technical sales on build vs. buy decisions, platform due diligence, and consumption- vs seat-based commercial models. Delivered dedicated data/analytics enablement sessions for non-technical customer stakeholders.",
+    "desc_de": "DataRobot Enterprise-Sales & Forward-Deployed Engineering in DACH: zwei sich ergänzende Rollen in einem 11-Monats-Engagement — Sales-Meetings mit 30+ Enterprise-Prospects (DAX und großer Mittelstand) und Hands-on-Proof-of-Value-Projekte mit deren Data-Science-Teams in 2–4-Wochen-Sprints, Aufbau schneller Prototypen auf DataRobots AI-Cloud-Plattform zur Demonstration messbaren Impacts. Nach 3 Monaten von PreSales in Sales-Rep befördert. Technische Sales-Gespräche zu Build vs. Buy, Plattform-Due-Diligence und Consumption- vs. Seat-basierten Commercial Models. Durchführung dedizierter Data-/Analytics-Enablement-Sessions für nicht-technische Stakeholder beim Kunden."
   },
   {
     "num": 30,
@@ -601,8 +601,8 @@ const PROJECTS = [
     "resp": "Communication, Stakeholder Mgmt",
     "tech": "OpenAI GPT-4, Python, Postgres, Domino Data Lab",
     "ref": "yes",
-    "desc_en": "AI & GenAI Efficiency Program at a top 5 German insurer: Project lead in T-role — oversight across all efficiency initiatives spanning the digital-native and traditional insurance arms, plus tech lead on two of them. Responded to a mid-engagement leadership change and top-down strategy pivot (digital native as innovator, traditional as fast follower) by redesigning the use-case priority stack and project plan from scratch without moving the original timeline — accounting for staffing constraints and tech dependencies, re-aligning stakeholders on both sides, and restarting execution within two weeks. Built central PMO and value-measurement function. Led Task Force HF1 on bill-dispatch optimization, preventing ~20,000 customer cancellations and delivering €2.5M profit impact. Sub-project lead on HF7, managing 7+ use cases including an email-prioritization solution.",
-    "desc_de": "AI- & GenAI-Effizienz-Programm bei einem Top-5-Versicherer in Deutschland: Projektleitung in T-Rolle — Oversight über alle Effizienz-Initiativen in den Digital-Native- und Traditional-Insurance-Armen, plus Tech-Lead für zwei davon. Reaktion auf mid-engagement Leadership-Wechsel und Top-Down-Strategiewende (Digital-Native als Innovator, Traditional als Fast-Follower) durch Neugestaltung des Use-Case-Prioritäten-Stacks und Projektplans von Grund auf — bei gleichbleibender ursprünglicher Timeline — unter Berücksichtigung von Staffing-Restriktionen und Tech-Abhängigkeiten, Re-Alignment der Stakeholder beider Seiten und Wiederaufnahme der Umsetzung innerhalb von zwei Wochen. Aufbau einer zentralen PMO- und Mehrwert-Mess-Funktion. Leitung Task Force HF1 zur Rechnungsversand-Optimierung — Verhinderung von ~20.000 Kundenkündigungen und Lieferung von 2,5 Mio. € Profit-Impact. Teilprojektleitung HF7, Management von 7+ Use Cases inklusive einer E-Mail-Priorisierungs-Lösung."
+    "desc_en": "AI & GenAI Efficiency Program at a top 5 German insurer: Project lead in T-role — oversight across all efficiency initiatives spanning the digital-native and traditional insurance arms, plus tech lead on two of them. Responded to a mid-engagement leadership change and top-down strategy pivot (digital native as innovator, traditional as fast follower) by redesigning the use-case priority stack and project plan from scratch without moving the original timeline — accounting for staffing constraints and tech dependencies, re-aligning stakeholders on both sides, and restarting execution within two weeks. Built central PMO and value-measurement function. Led Task Force on bill-dispatch optimization, preventing ~20,000 customer cancellations and delivering €2.5M profit impact. Project lead on the 'efficiency subproject', managing 7+ use cases including an email-prioritization solution.",
+    "desc_de": "AI- & GenAI-Effizienz-Programm bei einem Top-5-Versicherer in Deutschland: Projektleitung in T-Rolle — Oversight über alle Effizienz-Initiativen in den Digital-Native- und Traditional-Insurance-Armen, plus Tech-Lead für zwei davon. Reaktion auf mid-engagement Leadership-Wechsel und Top-Down-Strategiewende (Digital-Native als Innovator, Traditional als Fast-Follower) durch Neugestaltung des Use-Case-Prioritäten-Stacks und Projektplans von Grund auf — bei gleichbleibender ursprünglicher Timeline — unter Berücksichtigung von Staffing-Restriktionen und Tech-Abhängigkeiten, Re-Alignment der Stakeholder beider Seiten und Wiederaufnahme der Umsetzung innerhalb von zwei Wochen. Aufbau einer zentralen PMO- und Mehrwert-Mess-Funktion. Leitung der Task Force für Rechnungsversand-Optimierung — Verhinderung von ~20.000 Kundenkündigungen und Lieferung von 2,5 Mio. € Profit-Impact. Projektleitung des 'Effizienz-Teilprojekts', mit Management von 7+ Use Cases inklusive einer E-Mail-Priorisierungs-Lösung."
   },
   {
     "num": 31,

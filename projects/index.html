@@ -112,11 +112,28 @@
     opacity: 0.85;
     cursor: pointer;
     transition: opacity 0.15s, transform 0.15s;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
   }
   .tl-bar:hover {
     opacity: 1;
     transform: scaleY(1.25);
     z-index: 2;
+  }
+  .tl-bar:focus-visible,
+  .tl-group:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    opacity: 1;
+  }
+  .tl-group {
+    border: none;
+    padding: 0;
+    background: transparent;
+    font: inherit;
+    color: inherit;
   }
   .tl-bar.dim { opacity: 0.15; }
   .tl-bar.projected {
@@ -352,11 +369,20 @@
     transition: box-shadow 0.15s, border 0.15s, transform 0.12s;
     position: relative;
     overflow: hidden;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    width: 100%;
+    display: block;
   }
   .card:hover {
     box-shadow: var(--shadow-hover);
     border-color: var(--border-strong);
     transform: translateY(-1px);
+  }
+  .card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
   .card-stripe {
     position: absolute;
@@ -703,7 +729,19 @@
     a { border-bottom: none; color: inherit; }
   }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+<meta name="description" content="Jan Lubatschowski — Project portfolio. 30+ Data, Analytics and AI projects across insurance, healthcare, pharma, energy and more, at McKinsey, QuantCo, DataRobot and beyond.">
+<link rel="canonical" href="https://qpo.github.io/projects/">
+<link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Jan Lubatschowski — Project Portfolio">
+<meta property="og:description" content="30+ Data, Analytics and AI projects across insurance, healthcare, pharma, energy and more.">
+<meta property="og:url" content="https://qpo.github.io/projects/">
+<meta property="og:image" content="https://qpo.github.io/images/jan.jpg">
+<meta property="og:image:alt" content="Portrait of Jan Lubatschowski">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jan Lubatschowski — Project Portfolio">
+<meta name="twitter:description" content="30+ Data, Analytics and AI projects across insurance, healthcare, pharma, energy and more.">
+<meta name="twitter:image" content="https://qpo.github.io/images/jan.jpg">
 </head>
 <body>
 
@@ -717,9 +755,9 @@
     <span data-only-en>← CV</span>
     <span data-only-de>← Lebenslauf</span>
   </a>
-  <div class="lang-toggle" role="tablist">
-    <button id="lang-en" class="active" type="button"><svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><clipPath id="ujt"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#ujt)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>EN</button>
-    <button id="lang-de" type="button"><svg class="flag" viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="1" y="0" fill="#000"/><rect width="5" height="1" y="1" fill="#DD0000"/><rect width="5" height="1" y="2" fill="#FFCE00"/></svg>DE</button>
+  <div class="lang-toggle" role="group" aria-label="Language">
+    <button id="lang-en" class="active" type="button" aria-pressed="true"><svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk-flag-clip"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#uk-flag-clip)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>EN</button>
+    <button id="lang-de" type="button" aria-pressed="false"><svg class="flag" viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="1" y="0" fill="#000"/><rect width="5" height="1" y="1" fill="#DD0000"/><rect width="5" height="1" y="2" fill="#FFCE00"/></svg>DE</button>
   </div>
 </div>
 
@@ -762,6 +800,17 @@
 </div>
 
 <div class="result-count" id="count"></div>
+
+<noscript>
+  <section style="background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; margin-bottom: 20px;">
+    <h2 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">JavaScript is required for the interactive portfolio</h2>
+    <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin: 0;">
+      The timeline, filters and project details all require JavaScript.
+      For a static summary of experience, see the <a href="../index.html">CV page</a>
+      or the <a href="https://linkedin.com/in/janlubatschowski" target="_blank" rel="noopener">LinkedIn profile</a>.
+    </p>
+  </section>
+</noscript>
 
 <section class="projects" id="projects"></section>
 
@@ -892,31 +941,6 @@ let currentLang = "en";
 function t(key, ...args) {
   const v = I18N[currentLang][key];
   return typeof v === "function" ? v(...args) : v;
-}
-
-function exportPDF() {
-  const lang = document.documentElement.getAttribute("lang") || "en";
-  const filename = lang === "de" ? "Jan_Lubatschowski_Projektportfolio.pdf" : "Jan_Lubatschowski_Project_Portfolio.pdf";
-  document.body.classList.add("pdf-export");
-  const opt = {
-    margin: [10, 8, 10, 8],
-    filename: filename,
-    image: { type: "jpeg", quality: 0.95 },
-    html2canvas: { scale: 2, useCORS: true, logging: false, width: 794, windowWidth: 794 },
-    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-    pagebreak: { mode: ["css", "legacy", "avoid-all"], avoid: [".card", ".timeline-wrap", ".filter-section", ".stat"] }
-  };
-  if (typeof html2pdf === "undefined") {
-    document.body.classList.remove("pdf-export");
-    alert("PDF-Bibliothek noch nicht geladen — bitte kurz warten und erneut klicken.");
-    return;
-  }
-  html2pdf().set(opt).from(document.body).save().then(() => {
-    document.body.classList.remove("pdf-export");
-  }).catch((err) => {
-    console.error(err);
-    document.body.classList.remove("pdf-export");
-  });
 }
 
 // State
@@ -1080,15 +1104,17 @@ function renderTimeline() {
       const projEndPct = pctOf(toDate(p.to_projected));
       const totalSpan = projEndPct - left;
       const solidRatio = (right - left) / totalSpan * 100;
-      const group = document.createElement("div");
+      const group = document.createElement("button");
+      group.type = "button";
       group.className = "tl-group" + (isDim ? " dim" : "");
       group.style.left = left + "%";
       group.style.width = totalSpan + "%";
       group.style.bottom = (16 + row * 15) + "px";
       group.style.height = "12px";
       group.title = `#${p.num} · ${p.industry} · ${cust} — ${fmtDate(p.from)} → ${fmtDate(p.to)} (confirmed) · projected to ${fmtDate(p.to_projected)}`;
+      group.setAttribute("aria-label", `Open project #${p.num}: ${p.industry}, ${cust}`);
       group.onclick = () => openModal(p.num);
-      const solid = document.createElement("div");
+      const solid = document.createElement("span");
       solid.className = "tl-bar" + (isDim ? " dim" : "");
       solid.style.position = "absolute";
       solid.style.left = "0";
@@ -1097,7 +1123,7 @@ function renderTimeline() {
       solid.style.background = color;
       solid.style.bottom = "0";
       group.appendChild(solid);
-      const proj = document.createElement("div");
+      const proj = document.createElement("span");
       proj.className = "tl-bar projected" + (isDim ? " dim" : "");
       proj.style.position = "absolute";
       proj.style.left = solidRatio + "%";
@@ -1108,13 +1134,15 @@ function renderTimeline() {
       group.appendChild(proj);
       tl.appendChild(group);
     } else {
-      const bar = document.createElement("div");
+      const bar = document.createElement("button");
+      bar.type = "button";
       bar.className = "tl-bar" + (isDim ? " dim" : "");
       bar.style.left = left + "%";
       bar.style.width = width + "%";
       bar.style.bottom = (16 + row * 15) + "px";
       bar.style.background = color;
       bar.title = `#${p.num} · ${p.industry} · ${cust} — ${fmtDate(p.from)}${p.from !== p.to ? " → " + fmtDate(p.to) : ""}`;
+      bar.setAttribute("aria-label", `Open project #${p.num}: ${p.industry}, ${cust}`);
       bar.onclick = () => openModal(p.num);
       tl.appendChild(bar);
     }
@@ -1138,29 +1166,31 @@ function renderProjects() {
   }
   filtered.sort((a, b) => b.num - a.num);
   filtered.forEach(p => {
-    const card = document.createElement("div");
+    const card = document.createElement("button");
+    card.type = "button";
     card.className = "card";
+    card.setAttribute("aria-label", `Open project #${p.num}: ${p.industry}, ${customerLabel(p)}`);
     const color = INDUSTRY_COLORS[p.industry] || "#999";
     const cust = customerLabel(p);
 
     card.innerHTML = `
-      <div class="card-stripe" style="background:${color}"></div>
-      <div class="card-head">
-        <div>
-          <div class="card-num">#${String(p.num).padStart(2, "0")} · ${fmtDate(p.from)}${p.from !== p.to ? " → " + fmtDate(p.to) : ""} · ${fmtMonths(p.months)}</div>
-          <div class="card-title">${escapeHtml(p.industry)}</div>
-          <div class="card-org">${escapeHtml(cust)} · ${escapeHtml(p.country)}</div>
-        </div>
+      <span class="card-stripe" style="background:${color}"></span>
+      <span class="card-head">
+        <span>
+          <span class="card-num">#${String(p.num).padStart(2, "0")} · ${fmtDate(p.from)}${p.from !== p.to ? " → " + fmtDate(p.to) : ""} · ${fmtMonths(p.months)}</span>
+          <span class="card-title">${escapeHtml(p.industry)}</span>
+          <span class="card-org">${escapeHtml(cust)} · ${escapeHtml(p.country)}</span>
+        </span>
         <span class="role-chip"><span class="dot" style="background:${color}"></span>${escapeHtml(p.role_short || p.role)}</span>
-      </div>
-      <div class="card-desc">${escapeHtml(currentLang === "de" ? (p.desc_de || p.desc_en) : p.desc_en)}</div>
-      <div class="card-print-meta">
-        <div class="row"><span class="key">Role</span><span class="val">${escapeHtml(p.role)} · ${escapeHtml(p.level)}</span></div>
-        <div class="row"><span class="key">Type</span><span class="val">${escapeHtml(p.type)}</span></div>
-        ${p.tech ? `<div class="row"><span class="key">Tech</span><span class="val">${escapeHtml(p.tech)}</span></div>` : ""}
-        ${p.resp ? `<div class="row"><span class="key">Resp.</span><span class="val">${escapeHtml(p.resp)}</span></div>` : ""}
-        ${p.ref ? `<div class="row"><span class="key">Reference</span><span class="val">Available on request</span></div>` : ""}
-      </div>
+      </span>
+      <span class="card-desc">${escapeHtml(currentLang === "de" ? (p.desc_de || p.desc_en) : p.desc_en)}</span>
+      <span class="card-print-meta">
+        <span class="row"><span class="key">Role</span><span class="val">${escapeHtml(p.role)} · ${escapeHtml(p.level)}</span></span>
+        <span class="row"><span class="key">Type</span><span class="val">${escapeHtml(p.type)}</span></span>
+        ${p.tech ? `<span class="row"><span class="key">Tech</span><span class="val">${escapeHtml(p.tech)}</span></span>` : ""}
+        ${p.resp ? `<span class="row"><span class="key">Resp.</span><span class="val">${escapeHtml(p.resp)}</span></span>` : ""}
+        ${p.ref ? `<span class="row"><span class="key">Reference</span><span class="val">Available on request</span></span>` : ""}
+      </span>
     `;
     card.onclick = () => openModal(p.num);
     wrap.appendChild(card);
@@ -1168,18 +1198,27 @@ function renderProjects() {
 }
 
 // Modal
+let modalReturnFocus = null;
 function openModal(num) {
   const p = PROJECTS.find(x => x.num === num);
   if (!p) return;
+  modalReturnFocus = document.activeElement;
   state.modalProject = num;
   renderModal();
   document.getElementById("backdrop").classList.add("open");
   document.body.style.overflow = "hidden";
+  // Move focus into the modal so keyboard users can interact with it.
+  const closeBtn = document.getElementById("modal-close");
+  if (closeBtn) closeBtn.focus();
 }
 function closeModal() {
   document.getElementById("backdrop").classList.remove("open");
   state.modalProject = null;
   document.body.style.overflow = "";
+  if (modalReturnFocus && typeof modalReturnFocus.focus === "function") {
+    modalReturnFocus.focus();
+  }
+  modalReturnFocus = null;
 }
 function renderModal() {
   const p = PROJECTS.find(x => x.num === state.modalProject);
@@ -1209,12 +1248,12 @@ function renderModal() {
       ${p.ref ? `<div class="key">${t("reference")}</div><div class="val">${t("reference_available")}</div>` : ""}
     </div>
     <div class="modal-nav">
-      <button class="nav-btn" id="modal-next" ${next ? "" : "disabled"}>${next ? t("nav_older", next.num) : t("nav_older", "")}</button>
-      <button class="nav-btn" id="modal-prev" ${prev ? "" : "disabled"}>${prev ? t("nav_newer", prev.num) : t("nav_newer", "")}</button>
+      <button class="nav-btn" id="modal-older" ${next ? "" : "disabled"}>${next ? t("nav_older", next.num) : t("nav_older", "")}</button>
+      <button class="nav-btn" id="modal-newer" ${prev ? "" : "disabled"}>${prev ? t("nav_newer", prev.num) : t("nav_newer", "")}</button>
     </div>
   `;
-  if (prev) document.getElementById("modal-prev").onclick = () => openModal(prev.num);
-  if (next) document.getElementById("modal-next").onclick = () => openModal(next.num);
+  if (prev) document.getElementById("modal-newer").onclick = () => openModal(prev.num);
+  if (next) document.getElementById("modal-older").onclick = () => openModal(next.num);
 }
 
 function escapeHtml(s) {
@@ -1310,10 +1349,10 @@ function init() {
     if (state.modalProject === null) return;
     if (e.key === "Escape") closeModal();
     else if (e.key === "ArrowLeft") {
-      const btn = document.getElementById("modal-next");
+      const btn = document.getElementById("modal-older");
       if (btn && !btn.disabled) btn.click();
     } else if (e.key === "ArrowRight") {
-      const btn = document.getElementById("modal-prev");
+      const btn = document.getElementById("modal-newer");
       if (btn && !btn.disabled) btn.click();
     }
   });
@@ -1325,8 +1364,12 @@ function init() {
 function setLang(lang) {
   currentLang = lang;
   document.documentElement.setAttribute("lang", lang);
-  document.getElementById("lang-en").classList.toggle("active", lang === "en");
-  document.getElementById("lang-de").classList.toggle("active", lang === "de");
+  const enBtn = document.getElementById("lang-en");
+  const deBtn = document.getElementById("lang-de");
+  enBtn.classList.toggle("active", lang === "en");
+  deBtn.classList.toggle("active", lang === "de");
+  enBtn.setAttribute("aria-pressed", lang === "en" ? "true" : "false");
+  deBtn.setAttribute("aria-pressed", lang === "de" ? "true" : "false");
   document.getElementById("search").placeholder = t("search_placeholder");
   try { localStorage.setItem("siteLang", lang); } catch (e) {}
   render();
@@ -1342,8 +1385,12 @@ try {
 } catch (e) {}
 currentLang = initialLang;
 document.documentElement.setAttribute("lang", initialLang);
-document.getElementById("lang-en").classList.toggle("active", initialLang === "en");
-document.getElementById("lang-de").classList.toggle("active", initialLang === "de");
+const initEnBtn = document.getElementById("lang-en");
+const initDeBtn = document.getElementById("lang-de");
+initEnBtn.classList.toggle("active", initialLang === "en");
+initDeBtn.classList.toggle("active", initialLang === "de");
+initEnBtn.setAttribute("aria-pressed", initialLang === "en" ? "true" : "false");
+initDeBtn.setAttribute("aria-pressed", initialLang === "de" ? "true" : "false");
 
 init();
 document.getElementById("search").placeholder = t("search_placeholder");

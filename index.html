@@ -474,14 +474,26 @@
     a { border-bottom: none; color: inherit; }
   }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+<meta name="description" content="Jan Lubatschowski — Data Scientist → Project Lead. 10+ years putting Data, Analytics and AI into production at McKinsey, QuantCo and beyond. CV in English and German.">
+<link rel="canonical" href="https://qpo.github.io/">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Jan Lubatschowski — CV">
+<meta property="og:description" content="Data Scientist → Project Lead. 10+ years of Data, Analytics and AI at McKinsey, QuantCo and beyond.">
+<meta property="og:url" content="https://qpo.github.io/">
+<meta property="og:image" content="https://qpo.github.io/images/jan.jpg">
+<meta property="og:image:alt" content="Portrait of Jan Lubatschowski">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jan Lubatschowski — CV">
+<meta name="twitter:description" content="Data Scientist → Project Lead. 10+ years of Data, Analytics and AI at McKinsey, QuantCo and beyond.">
+<meta name="twitter:image" content="https://qpo.github.io/images/jan.jpg">
 </head>
 <body>
 
 <div class="topbar no-print">
-  <div class="lang-toggle" role="tablist">
-    <button id="lang-en" class="active" type="button"><svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><clipPath id="ujt"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#ujt)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>EN</button>
-    <button id="lang-de" type="button"><svg class="flag" viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="1" y="0" fill="#000"/><rect width="5" height="1" y="1" fill="#DD0000"/><rect width="5" height="1" y="2" fill="#FFCE00"/></svg>DE</button>
+  <div class="lang-toggle" role="group" aria-label="Language">
+    <button id="lang-en" class="active" type="button" aria-pressed="true"><svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><clipPath id="ujt"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#ujt)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>EN</button>
+    <button id="lang-de" type="button" aria-pressed="false"><svg class="flag" viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="1" y="0" fill="#000"/><rect width="5" height="1" y="1" fill="#DD0000"/><rect width="5" height="1" y="2" fill="#FFCE00"/></svg>DE</button>
   </div>
 </div>
 
@@ -501,8 +513,6 @@
       <span data-only-de>Berlin, Deutschland</span>
       <span class="sep">·</span>
       <a href="mailto:JanLubatschowski@gmail.com">JanLubatschowski@gmail.com</a>
-      <span class="sep">·</span>
-      <span>+49 151 688 067 34</span>
       <span class="sep">·</span>
       <a href="https://linkedin.com/in/janlubatschowski" target="_blank" rel="noopener">linkedin.com/in/janlubatschowski</a>
       <span class="sep">·</span>
@@ -808,33 +818,14 @@
 </footer>
 
 <script>
-  function exportPDF() {
-    const lang = document.documentElement.getAttribute("lang") || "en";
-    const filename = lang === "de" ? "Jan_Lubatschowski_Lebenslauf.pdf" : "Jan_Lubatschowski_CV.pdf";
-    if (typeof html2pdf === "undefined") {
-      alert("PDF-Bibliothek noch nicht geladen — bitte kurz warten und erneut klicken.");
-      return;
-    }
-    document.body.classList.add("pdf-export");
-    const opt = {
-      margin: [12, 10, 12, 10],
-      filename: filename,
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, logging: false, windowWidth: 1100 },
-      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-      pagebreak: { mode: ["css", "legacy", "avoid-all"], avoid: ".role, .edu-item, .recognition-list li, .early-item, .profile" }
-    };
-    html2pdf().set(opt).from(document.body).save().then(() => {
-      document.body.classList.remove("pdf-export");
-    }).catch((err) => {
-      console.error(err);
-      document.body.classList.remove("pdf-export");
-    });
-  }
   function setLang(lang) {
     document.documentElement.setAttribute("lang", lang);
-    document.getElementById("lang-en").classList.toggle("active", lang === "en");
-    document.getElementById("lang-de").classList.toggle("active", lang === "de");
+    const enBtn = document.getElementById("lang-en");
+    const deBtn = document.getElementById("lang-de");
+    enBtn.classList.toggle("active", lang === "en");
+    deBtn.classList.toggle("active", lang === "de");
+    enBtn.setAttribute("aria-pressed", lang === "en" ? "true" : "false");
+    deBtn.setAttribute("aria-pressed", lang === "de" ? "true" : "false");
     try { localStorage.setItem("siteLang", lang); } catch (e) {}
   }
   document.getElementById("lang-en").addEventListener("click", () => setLang("en"));

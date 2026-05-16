@@ -1324,12 +1324,14 @@ function init() {
     return a.localeCompare(b);
   });
 
-  // Organizations: sort by frequency, then alpha
-  const orgFreq = {};
-  PROJECTS.forEach(p => { orgFreq[p.organization] = (orgFreq[p.organization] || 0) + 1; });
+  // Organizations: custom order (Jan's preferred narrative)
+  const ORG_ORDER = ["McKinsey", "United Nations", "QuantCo", "Waterland Private Equity", "DataRobot", "Accenture", "Sennheiser", "Robert Bosch GmbH", "Northwestern University"];
   const organizations = [...new Set(PROJECTS.map(p => p.organization))].sort((a, b) => {
-    const diff = (orgFreq[b] || 0) - (orgFreq[a] || 0);
-    if (diff !== 0) return diff;
+    const ia = ORG_ORDER.indexOf(a);
+    const ib = ORG_ORDER.indexOf(b);
+    if (ia >= 0 && ib >= 0) return ia - ib;
+    if (ia >= 0) return -1;
+    if (ib >= 0) return 1;
     return a.localeCompare(b);
   });
 

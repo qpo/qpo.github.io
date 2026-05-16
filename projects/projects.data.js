@@ -647,7 +647,7 @@ const PROJECTS = [
   {
     "num": 33,
     "from": "2025-03",
-    "to": "2026-02",
+    "to": "2026-03",
     "months": 12,
     "industry": "Insurance",
     "level": "Professional",

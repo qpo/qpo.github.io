@@ -398,6 +398,8 @@
     margin-bottom: 8px;
     gap: 12px;
   }
+  .card-head > span:first-child { min-width: 0; flex: 1 1 0; }
+  .card-head > .role-chip { flex-shrink: 0; }
   .card-num {
     display: block;
     font-size: 11px;
@@ -1174,7 +1176,7 @@ function renderProjects() {
           <span class="card-title">${escapeHtml(p.industry)}</span>
           <span class="card-org">${escapeHtml(cust)} · ${escapeHtml(p.country)}</span>
         </span>
-        <span class="role-chip"><span class="dot" style="background:${color}"></span>${escapeHtml(p.role_short || p.role)}</span>
+        <span class="role-chip">${escapeHtml(p.role_short || p.role)}</span>
       </span>
       <span class="card-desc">${escapeHtml(currentLang === "de" ? (p.desc_de || p.desc_en) : p.desc_en)}</span>
       <span class="card-print-meta">

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum / Legal Notice — Jan Lubatschowski</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    --bg: #faf9f6;
+    --surface: #ffffff;
+    --surface-2: #f4f2ed;
+    --border: #e8e6e0;
+    --border-strong: #d4d1c8;
+    --text: #1a1a1a;
+    --text-muted: #6b6b6b;
+    --text-faint: #9a9a9a;
+    --accent: #c8553d;
+    --accent-soft: #f3d8d2;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-hover: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    font-size: 15px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    min-height: 100vh;
+    padding: 36px 24px 80px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border-strong); }
+  a:hover { border-color: var(--text); }
+
+  /* Language switching */
+  html[lang="en"] [data-only-de] { display: none !important; }
+  html[lang="de"] [data-only-en] { display: none !important; }
+
+  /* Top bar */
+  .topbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .topbar .reset-btn {
+    padding: 5px 14px;
+    font-size: 12px;
+    border-radius: 20px;
+    line-height: 1.5;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .topbar .reset-btn:hover { border-color: var(--text); color: var(--text); }
+  .lang-toggle {
+    display: inline-flex;
+    border: 1px solid var(--border-strong);
+    border-radius: 20px;
+    overflow: hidden;
+    font-size: 12px;
+    background: var(--surface);
+  }
+  .lang-toggle button {
+    padding: 5px 14px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--text-muted);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+  }
+  .lang-toggle button.active {
+    background: var(--text);
+    color: var(--surface);
+  }
+  .flag {
+    width: 18px;
+    height: 12px;
+    border-radius: 1px;
+    vertical-align: middle;
+    margin-right: 6px;
+    display: inline-block;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+  }
+
+  /* Hero */
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 28px;
+  }
+
+  /* Legal prose */
+  .legal h2 {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 30px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .legal h2:first-of-type { margin-top: 0; }
+  .legal p {
+    font-size: 14.5px;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .legal p.lead {
+    color: var(--text-muted);
+    margin-bottom: 18px;
+  }
+  .legal strong { font-weight: 600; }
+  .legal .block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 14px;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .legal .block .label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .legal .block + .block { margin-top: -2px; }
+  .muted-note {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* Footer */
+  .site-footer {
+    margin-top: 44px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-faint);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .site-footer a { color: var(--text-muted); border-bottom-color: var(--border); }
+  .site-footer .heart { color: #c8553d; }
+
+  @media (max-width: 640px) {
+    body { padding: 24px 16px 60px; }
+    h1 { font-size: 27px; }
+  }
+</style>
+<link rel="canonical" href="https://janlubatschowski.de/impressum.html">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+</head>
+<body>
+
+<div class="topbar">
+  <a class="reset-btn" href="datenschutz.html">
+    <span data-only-en>Privacy</span>
+    <span data-only-de>Datenschutz</span>
+  </a>
+  <a class="reset-btn" href="index.html">
+    <span data-only-en>← CV</span>
+    <span data-only-de>← Lebenslauf</span>
+  </a>
+  <div class="lang-toggle" role="group" aria-label="Language">
+    <button id="lang-en" class="active" type="button" aria-pressed="true"><svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk-flag-clip"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#uk-flag-clip)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>EN</button>
+    <button id="lang-de" type="button" aria-pressed="false"><svg class="flag" viewBox="0 0 5 3" aria-hidden="true"><rect width="5" height="1" y="0" fill="#000"/><rect width="5" height="1" y="1" fill="#DD0000"/><rect width="5" height="1" y="2" fill="#FFCE00"/></svg>DE</button>
+  </div>
+</div>
+
+<div class="hero-eyebrow">
+  <span data-only-en>Legal Notice</span>
+  <span data-only-de>Impressum</span>
+</div>
+<h1>
+  <span data-only-en>Legal Notice</span>
+  <span data-only-de>Impressum</span>
+</h1>
+
+<main class="legal">
+
+  <!-- Provider -->
+  <h2>
+    <span data-only-en>Information pursuant to § 5 DDG</span>
+    <span data-only-de>Angaben gemäß § 5 DDG</span>
+  </h2>
+  <p class="lead" data-only-en>This website is a private, single-person service. The provider responsible for it under the German Digital Services Act (Digitale-Dienste-Gesetz, DDG) is:</p>
+  <p class="lead" data-only-de>Diese Website ist ein privates Ein-Personen-Angebot. Diensteanbieter im Sinne des Digitale-Dienste-Gesetzes (DDG) ist:</p>
+
+  <div class="block">
+    <span class="label"><span data-only-en>Provider</span><span data-only-de>Diensteanbieter</span></span>
+    <strong>Jan Lubatschowski</strong><br>
+    <span data-addr></span>
+    <noscript>Sophie-Charlotten-Straße 117C<br>14059 Berlin<br></noscript>
+    <span data-only-en>Germany</span><span data-only-de>Deutschland</span>
+  </div>
+
+  <div class="block">
+    <span class="label"><span data-only-en>Contact</span><span data-only-de>Kontakt</span></span>
+    <span data-only-en>Email: </span><span data-only-de>E-Mail: </span><a data-c="email" href="#"></a>
+    <noscript><span class="muted-note">janlubatschowski&nbsp;(at)&nbsp;gmail&nbsp;(dot)&nbsp;com</span></noscript>
+    <div class="muted-note" style="margin-top:6px;">
+      <span data-only-en>Contact details are assembled in your browser to reduce automated harvesting; a plain version is provided for browsers without JavaScript.</span>
+      <span data-only-de>Die Kontaktdaten werden zum Schutz vor automatischem Auslesen in Ihrem Browser zusammengesetzt; für Browser ohne JavaScript steht eine einfache Variante bereit.</span>
+    </div>
+  </div>
+
+  <!-- VAT -->
+  <h2>
+    <span data-only-en>VAT identification number</span>
+    <span data-only-de>Umsatzsteuer-Identifikationsnummer</span>
+  </h2>
+  <p data-only-en>VAT identification number pursuant to § 27a of the German VAT Act (Umsatzsteuergesetz):<br><strong>DE359022076</strong></p>
+  <p data-only-de>Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:<br><strong>DE359022076</strong></p>
+
+  <!-- Responsible for content -->
+  <h2>
+    <span data-only-en>Responsible for the content</span>
+    <span data-only-de>Inhaltlich verantwortlich</span>
+  </h2>
+  <p data-only-en>Responsible for the content pursuant to § 18 (2) of the German Interstate Media Treaty (Medienstaatsvertrag, MStV): Jan Lubatschowski (address as above).</p>
+  <p data-only-de>Verantwortlich für den Inhalt nach § 18 Abs. 2 Medienstaatsvertrag (MStV): Jan Lubatschowski (Anschrift wie oben).</p>
+
+  <!-- Consumer dispute resolution -->
+  <h2>
+    <span data-only-en>Consumer dispute resolution</span>
+    <span data-only-de>Verbraucherstreitbeilegung</span>
+  </h2>
+  <p data-only-en>I am neither willing nor obliged to participate in dispute resolution proceedings before a consumer arbitration board (Verbraucherschlichtungsstelle) within the meaning of § 36 of the German Consumer Dispute Resolution Act (VSBG).</p>
+  <p data-only-de>Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle im Sinne des § 36 Verbraucherstreitbeilegungsgesetz (VSBG) teilzunehmen.</p>
+
+  <!-- Liability -->
+  <h2>
+    <span data-only-en>Liability for content</span>
+    <span data-only-de>Haftung für Inhalte</span>
+  </h2>
+  <p data-only-en>As a service provider, I am responsible for my own content on these pages in accordance with § 7 (1) DDG and general law. I am, however, not obliged to monitor transmitted or stored third-party information or to investigate circumstances that indicate unlawful activity. Obligations to remove or block the use of information under general law remain unaffected; any liability in this respect is, however, only possible from the point in time at which knowledge of a specific infringement of the law becomes known. Upon notification of corresponding legal violations, I will remove this content immediately.</p>
+  <p data-only-de>Als Diensteanbieter bin ich gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Ich bin jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden entsprechender Rechtsverletzungen werde ich diese Inhalte umgehend entfernen.</p>
+
+  <h2>
+    <span data-only-en>Liability for links</span>
+    <span data-only-de>Haftung für Links</span>
+  </h2>
+  <p data-only-en>This website contains links to external third-party websites over whose content I have no influence. Therefore, I cannot accept any liability for this third-party content. The respective provider or operator of the linked pages is always responsible for their content. The linked pages were checked for possible legal violations at the time of linking; no unlawful content was identifiable at that time. Permanent monitoring of the content of the linked pages is not reasonable without concrete evidence of an infringement. Upon becoming aware of legal violations, I will remove such links immediately.</p>
+  <p data-only-de>Diese Website enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann ich für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft; rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Links umgehend entfernen.</p>
+
+  <h2>
+    <span data-only-en>Copyright</span>
+    <span data-only-de>Urheberrecht</span>
+  </h2>
+  <p data-only-en>The content and works created by the site operator on these pages are subject to German copyright law. Contributions from third parties are marked as such. Reproduction, processing, distribution, and any kind of use beyond the limits of copyright require the written consent of the respective author or creator.</p>
+  <p data-only-de>Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+
+</main>
+
+<footer class="site-footer">
+  <div>© 2026 Jan Lubatschowski</div>
+  <div>
+    <a href="index.html"><span data-only-en>CV</span><span data-only-de>Lebenslauf</span></a>
+    · <a href="projects/index.html"><span data-only-en>Project portfolio</span><span data-only-de>Projektportfolio</span></a>
+    · <a href="datenschutz.html"><span data-only-en>Privacy</span><span data-only-de>Datenschutz</span></a>
+  </div>
+</footer>
+
+<script>
+  // --- Language switch (shared with the rest of the site) ---
+  function setLang(lang) {
+    document.documentElement.setAttribute("lang", lang);
+    var enBtn = document.getElementById("lang-en");
+    var deBtn = document.getElementById("lang-de");
+    enBtn.classList.toggle("active", lang === "en");
+    deBtn.classList.toggle("active", lang === "de");
+    enBtn.setAttribute("aria-pressed", lang === "en" ? "true" : "false");
+    deBtn.setAttribute("aria-pressed", lang === "de" ? "true" : "false");
+    try { localStorage.setItem("siteLang", lang); } catch (e) {}
+  }
+  document.getElementById("lang-en").addEventListener("click", function () { setLang("en"); });
+  document.getElementById("lang-de").addEventListener("click", function () { setLang("de"); });
+  var initial = "en";
+  try {
+    var stored = localStorage.getItem("siteLang");
+    if (stored === "en" || stored === "de") initial = stored;
+  } catch (e) {}
+  setLang(initial);
+
+  // --- Contact data assembled in-browser (anti-scraping). A plain <noscript>
+  //     fallback exists for browsers without JavaScript. ---
+  function dec(a) { return String.fromCharCode.apply(null, a); }
+  var CONTACT = {
+    street: dec([83,111,112,104,105,101,45,67,104,97,114,108,111,116,116,101,110,45,83,116,114,97,223,101,32,49,49,55,67]),
+    city: dec([49,52,48,53,57,32,66,101,114,108,105,110]),
+    email: dec([106,97,110,108,117,98,97,116,115,99,104,111,119,115,107,105,64,103,109,97,105,108,46,99,111,109])
+  };
+  document.querySelectorAll('[data-addr]').forEach(function (el) {
+    el.innerHTML = CONTACT.street + "<br>" + CONTACT.city + "<br>";
+  });
+  document.querySelectorAll('[data-c="email"]').forEach(function (el) {
+    el.textContent = CONTACT.email;
+    el.setAttribute("href", "mailto:" + CONTACT.email);
+  });
+</script>
+
+</body>
+</html>
